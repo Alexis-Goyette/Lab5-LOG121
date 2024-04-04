@@ -4,6 +4,7 @@ import java.util.*;
 import javafx.scene.image.Image;
 
 public class ModeleImg {
+    
     private Image image;
     private ArrayList<ImageView> observateurs;
     private int translationValue;
@@ -39,6 +40,9 @@ public class ModeleImg {
     }
 
     public void NotifyObservers() {
+        for (var observer : observateurs) {
+            observer.Update();
+        }
     }
 
     public void TranslateLeft() {

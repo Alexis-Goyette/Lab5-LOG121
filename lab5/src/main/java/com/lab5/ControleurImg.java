@@ -9,12 +9,36 @@ public class ControleurImg {
     private CopyPasteMediator mediator;
 
     private ControleurImg(ModeleImg model) {
+        modImg = model;
+        instanceUnique = this;
     }
 
-    public void TranslateImage(TranslationDirection direction) {
+    public void TranslateImage(TranslationDirection.translationDirection direction) {
+        switch (direction) {
+            case LEFT:
+                modImg.TranslateLeft();
+                break;
+            case RIGHT:
+                modImg.TranslateRight();
+                break;
+            case UP:
+                modImg.TranslateUp();
+                break;
+            case DOWN:
+                modImg.TranslateDown();
+                break;
+        }
     }
 
-    public void ZoomImage(ZoomDirection direction) {
+    public void ZoomImage(ZoomDirection.zoomDirection direction) {
+        switch (direction) {
+            case IN:
+                modImg.ZoomIn();
+                break;
+            case OUT:
+                modImg.ZoomOut();
+                break;
+        }
     }
 
     public void SaveImage() {
@@ -26,7 +50,7 @@ public class ControleurImg {
     public void Undo() {
     }
 
-    public ControleurImg GetInstance() {
+    public static ControleurImg GetInstance() {
         return instanceUnique;
     }
 
