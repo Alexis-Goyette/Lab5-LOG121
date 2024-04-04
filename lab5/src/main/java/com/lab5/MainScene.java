@@ -14,12 +14,13 @@ import javafx.application.Application;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import java.io.File;
-
 
 public class MainScene extends Application {
 
     private Image image;
+
     @Override
     public void start(Stage stage) {
         GridPane grid = new GridPane();
@@ -48,7 +49,10 @@ public class MainScene extends Application {
             File file = fileChooser.showOpenDialog(stage);
             if (file != null) {
                 image = new Image(file.toURI().toString());
+                ImageView imageView = new ImageView(image);
+                grid.add(imageView, 0, 15);
             }
+
         });
 
         stage.show();
