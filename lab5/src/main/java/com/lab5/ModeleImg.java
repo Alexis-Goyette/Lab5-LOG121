@@ -11,19 +11,31 @@ public class ModeleImg {
     private Stack<ImgMemento> mementoStack;
 
     public ModeleImg(Image image) {
+        this.image = image;
+        observateurs = new ArrayList<ImageView>();
+        translationValue = 0;
+        scaleFactor = 1;
+        mementoStack = new Stack<ImgMemento>();
+
     }
 
     public Image GetImage() {
         return image;
     }
 
-    public void SetImage(Image image) {
+    public void SetImage(Image i) {
+        image = i;
     }
 
     public void AddObserver(ImageView observer) {
+        observateurs.add(observer);
     }
 
     public void RemoveObserver(ImageView observer) {
+        int index = observateurs.indexOf(observer);
+        if (index > 0) {
+            observateurs.remove(index);
+        }
     }
 
     public void NotifyObservers() {
@@ -54,10 +66,11 @@ public class ModeleImg {
     }
 
     public ImgMemento CréerMemento() {
-        return new ImgMemento();
+        return new ImgMemento(image);
     }
 
-    public void SetMemento() {
+    public void SetMemento(ImgMemento m) {
+        mementoStack.push(m);
     }
 
     public int GetScaleFactor() {
