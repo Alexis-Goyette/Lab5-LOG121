@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.GridPane?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.MenuButton?>
-<GridPane alignment="TOP_LEFT" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="TOP_LEFT" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.lab5.ControleurImg">
     <padding>
-        <Insets top="10" right="10" bottom="10" left="10" />
+        <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
     <children>
-        <MenuButton text="Fichier" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;">
+        <MenuButton fx:id="mbFichier" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" text="Fichier">
             <items>
                 <MenuItem text="Sauvegarder perspective" />
                 <MenuItem text="Charger perspective" />
@@ -18,16 +20,24 @@
                 <MenuItem text="Quitter" />
             </items>
         </MenuButton>
-        <MenuButton text="Edition" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" GridPane.columnIndex="1">
+        <MenuButton fx:id="mbEdition" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" text="Edition" GridPane.columnIndex="1">
             <items>
                 <MenuItem text="Défaire" />
                 <MenuItem text="Refaire" />
             </items>
         </MenuButton>
-        <MenuButton text="Presse-Papier" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" GridPane.columnIndex="2">
+        <MenuButton fx:id="mbPP" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" text="Presse-Papier" GridPane.columnIndex="2">
             <items>
                 <MenuItem text="Choisir stratégie" />
             </items>
         </MenuButton>
     </children>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>

@@ -1,6 +1,17 @@
 package com.lab5;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.MenuButton;
+
 public class ControleurImg {
+
+    @FXML
+    private MenuButton mbFichier;
+    @FXML
+    private MenuButton mbEdition;
+    @FXML
+    private MenuButton mbPP;
+
 
     private ModeleImg modImg;
     private int indexCommand;
