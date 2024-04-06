@@ -4,7 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
 
 public class ControleurImg {
-
+    public ControleurImg() {
+        // Default constructor
+    }
     @FXML
     private MenuButton mbFichier;
     @FXML
