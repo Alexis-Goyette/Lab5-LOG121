@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="TOP_LEFT" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.lab5.ControleurImg">
+<GridPane alignment="TOP_LEFT" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab5.ControleurImg">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
     <children>
         <MenuButton fx:id="mbFichier" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" text="Fichier">
             <items>
-                <MenuItem text="Sauvegarder perspective" />
-                <MenuItem text="Charger perspective" />
-                <MenuItem text="Charger image" />
+                <MenuItem fx:id="miSauvergarderPerspective" text="Sauvegarder perspective" />
+                <MenuItem fx:id="mi" text="Charger perspective" />
+                <MenuItem fx:id="miCI" text="Charger image" />
                 <MenuItem text="Quitter" />
             </items>
         </MenuButton>
