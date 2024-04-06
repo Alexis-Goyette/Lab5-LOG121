@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="TOP_LEFT" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab5.ControleurImg">
+<GridPane alignment="TOP_LEFT" hgap="10" prefHeight="536.0" prefWidth="1243.0" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab5.ControleurImg">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
     <children>
-        <MenuButton fx:id="mbFichier" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" text="Fichier">
+        <MenuButton fx:id="mbFichier" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" text="Fichier" GridPane.columnIndex="1">
             <items>
                 <MenuItem fx:id="miSauvergarderPerspective" text="Sauvegarder perspective" />
                 <MenuItem fx:id="mi" text="Charger perspective" />
@@ -25,19 +28,47 @@
                 <MenuItem text="Défaire" />
                 <MenuItem text="Refaire" />
             </items>
+         <GridPane.margin>
+            <Insets left="75.0" />
+         </GridPane.margin>
         </MenuButton>
-        <MenuButton fx:id="mbPP" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" text="Presse-Papier" GridPane.columnIndex="2">
+        <MenuButton fx:id="mbPP" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" text="Presse-Papier" GridPane.columnIndex="1">
             <items>
                 <MenuItem text="Choisir stratégie" />
             </items>
+         <GridPane.margin>
+            <Insets left="150.0" />
+         </GridPane.margin>
         </MenuButton>
+      <ImageView fx:id="imgViewOriginal" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <ImageView fx:id="imgView1" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <ImageView fx:id="imgView2" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        <ButtonBar buttonOrder="L_E+U+OCAHNRFX" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <buttons>
+                <Button fx:id="btnGauche" mnemonicParsing="false" text="←" /> <!-- Right arrow -->
+                <Button fx:id="btnHaut" mnemonicParsing="false" text="↑" /> <!-- Up arrow -->
+                <Button fx:id="btnDroite" mnemonicParsing="false" text="→" /> <!-- Right arrow -->
+                <Button fx:id="btnBas" mnemonicParsing="false" text="↓" /> <!-- Down arrow -->
+                <Button fx:id="btnZoomIn" mnemonicParsing="false" text="+" />
+                <Button fx:id="btnZoomOut" mnemonicParsing="false" text="-" />
+            </buttons>
+         <GridPane.margin>
+            <Insets right="35.0" />
+         </GridPane.margin>
+        </ButtonBar>
+        
+
     </children>
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints percentWidth="33.33" />
+        <ColumnConstraints percentWidth="33.33" />
+      <ColumnConstraints percentWidth="33.33" />
+    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="70.0" />
    </rowConstraints>
 </GridPane>

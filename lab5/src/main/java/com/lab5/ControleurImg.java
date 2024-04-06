@@ -5,12 +5,12 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
-
+import javafx.scene.image.ImageView;
 import java.io.File;
 
 public class ControleurImg {
     public ControleurImg() {
-        //initialize();
+
     }
     @FXML
     private MenuButton mbFichier;
@@ -20,6 +20,12 @@ public class ControleurImg {
     private MenuButton mbPP;
     @FXML
     private MenuItem miCI;
+    @FXML
+    private ImageView imgViewOriginal;
+    @FXML
+    private ImageView imgView1;
+    @FXML
+    private ImageView imgView2;
 
     private ModeleImg modImg;
     private int indexCommand;
@@ -95,6 +101,15 @@ public class ControleurImg {
             File file = fileChooser.showOpenDialog(miCI.getParentPopup().getScene().getWindow());
             if (file != null) {
                 image = new Image(file.toURI().toString());
+                imgViewOriginal.setImage(image);
+                imgViewOriginal.setFitWidth(535); // Set the width
+                imgViewOriginal.setFitHeight(500);
+                imgView1.setImage(image);
+                imgView1.setFitWidth(535); // Set the width
+                imgView1.setFitHeight(500);
+                imgView2.setImage(image);
+                imgView2.setFitWidth(535); // Set the width
+                imgView2.setFitHeight(500);
             }
         });
     }
