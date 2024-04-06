@@ -2,10 +2,15 @@ package com.lab5;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+
+import java.io.File;
 
 public class ControleurImg {
     public ControleurImg() {
-        // Default constructor
+        //initialize();
     }
     @FXML
     private MenuButton mbFichier;
@@ -13,13 +18,15 @@ public class ControleurImg {
     private MenuButton mbEdition;
     @FXML
     private MenuButton mbPP;
-
+    @FXML
+    MenuItem miCI;
 
     private ModeleImg modImg;
     private int indexCommand;
     private ICommand command;
     private static ControleurImg instanceUnique;
     private CopyPasteMediator mediator;
+    private Image image;
 
     private ControleurImg(ModeleImg model) {
         modImg = model;
@@ -74,4 +81,14 @@ public class ControleurImg {
     }
     // je suis pas sûr si le type de "source" et "destination" est bon,
     // il était pas marqué dans l'uml, à changer au besoin
+    @FXML
+private void ChargerImageOnclick() {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+           File file = fileChooser.showOpenDialog(miCI.getParentPopup().getScene().getWindow());
+            if (file != null) {
+                image = new Image(file.toURI().toString());
+            }
+        }
+
 }
