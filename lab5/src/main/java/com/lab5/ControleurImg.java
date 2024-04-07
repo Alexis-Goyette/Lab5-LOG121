@@ -19,7 +19,7 @@ public class ControleurImg {
     private Button btnHaut;
     private  Button btnBas;
     private Button btnZoomIn ;
-    private   Button btnZoomOut;
+    private Button btnZoomOut;
 
     private ModeleImg modeleImgMilieu;
     private ModeleImg modeleImgDroite ;
@@ -105,14 +105,13 @@ public class ControleurImg {
     }
 
     @FXML
-public void translateLeft() {
-    btnGauche.setOnAction(e -> {
-        if(modeleImgSelectionne == modeleImgMilieu)
-            translateCommandLeftModImg1.execute();
-        else
-            translateCommandLeftModImg2.execute();
-
-    });
+    public void translateLeft() {
+        btnGauche.setOnAction(e -> {
+            if(modeleImgSelectionne == modeleImgMilieu)
+                translateCommandLeftModImg1.execute();
+            else
+                translateCommandLeftModImg2.execute();
+        });
     }
     @FXML
     public void translateRight() {
@@ -125,23 +124,22 @@ public void translateLeft() {
     }
 
     @FXML
-    public void translateUp() {
+    public void translateDown() {
         btnBas.setOnAction(e -> {
-            if(modeleImgSelectionne == modeleImgMilieu)
-                translateCommandUpModImg1.execute();
-            else
-                translateCommandUpModImg2.execute();
-
-        });
-}
-    @FXML
-public void translateDown() {
-        btnHaut.setOnAction(e -> {
             if(modeleImgSelectionne == modeleImgMilieu)
                 translateCommandDownModImg1.execute();
             else
                 translateCommandDownModImg2.execute();
+        });
+    }
 
+    @FXML
+    public void translateUp() {
+        btnHaut.setOnAction(e -> {
+            if(modeleImgSelectionne == modeleImgMilieu)
+                translateCommandUpModImg1.execute();
+            else
+                translateCommandUpModImg2.execute();
         });
     }
 

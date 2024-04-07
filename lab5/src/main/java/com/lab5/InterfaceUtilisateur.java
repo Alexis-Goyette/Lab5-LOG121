@@ -12,59 +12,6 @@ import javafx.stage.Stage;
 import java.io.File;
 
 public class InterfaceUtilisateur implements IObserver {
-    public MenuButton getMbFichier() {
-        return mbFichier;
-    }
-
-    public MenuButton getMbEdition() {
-        return mbEdition;
-    }
-
-    public MenuButton getMbPP() {
-        return mbPP;
-    }
-
-    public MenuItem getMiCI() {
-        return miCI;
-    }
-
-    public ImageView getImgViewOriginal() {
-        return imgViewOriginal;
-    }
-
-    public ImageView getImgView1() {
-        return imgView1;
-    }
-
-    public ImageView getImgView2() {
-        return imgView2;
-    }
-
-    public Button getBtnZoomIn() {
-        return btnZoomIn;
-    }
-
-    public Button getBtnZoomOut() {
-        return btnZoomOut;
-    }
-
-    public Button getBtnBas() {
-        return btnBas;
-    }
-
-    public Button getBtnHaut() {
-        return btnHaut;
-    }
-
-    public Button getBtnGauche() {
-        return btnGauche;
-    }
-
-    public Button getBtnDroite() {
-        return btnDroite;
-    }
-
-
 
     @FXML
     private MenuButton mbFichier;
@@ -127,6 +74,25 @@ public class InterfaceUtilisateur implements IObserver {
                 imgView2.setFitWidth(535); // Set the width
                 imgView2.setFitHeight(500);
                 controleur= ControleurImg.getInstance(this);
+                btnBas.setOnAction(innerEvent -> {
+                    controleur.translateDown();
+                });
+                btnHaut.setOnAction(innerEvent -> {
+                    controleur.translateUp();
+                });
+                btnGauche.setOnAction(innerEvent -> {
+                    controleur.translateLeft();
+                });
+                btnDroite.setOnAction(innerEvent -> {
+                    controleur.translateRight();
+                });
+                imgView1.setOnMouseClicked(e -> {
+                    controleur.selectionementImgV1();
+                });
+                imgView2.setOnMouseClicked(e -> {
+                    controleur.selectionementImgV2();
+                });
+
             }
         });
     }
@@ -140,5 +106,58 @@ public class InterfaceUtilisateur implements IObserver {
     }
 
     public void Start(Stage primaryStage) {
+    }
+
+
+    public MenuButton getMbFichier() {
+        return mbFichier;
+    }
+
+    public MenuButton getMbEdition() {
+        return mbEdition;
+    }
+
+    public MenuButton getMbPP() {
+        return mbPP;
+    }
+
+    public MenuItem getMiCI() {
+        return miCI;
+    }
+
+    public ImageView getImgViewOriginal() {
+        return imgViewOriginal;
+    }
+
+    public ImageView getImgView1() {
+        return imgView1;
+    }
+
+    public ImageView getImgView2() {
+        return imgView2;
+    }
+
+    public Button getBtnZoomIn() {
+        return btnZoomIn;
+    }
+
+    public Button getBtnZoomOut() {
+        return btnZoomOut;
+    }
+
+    public Button getBtnBas() {
+        return btnBas;
+    }
+
+    public Button getBtnHaut() {
+        return btnHaut;
+    }
+
+    public Button getBtnGauche() {
+        return btnGauche;
+    }
+
+    public Button getBtnDroite() {
+        return btnDroite;
     }
 }

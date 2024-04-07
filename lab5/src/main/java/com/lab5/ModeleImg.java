@@ -47,19 +47,20 @@ public class ModeleImg {
 //    }
     public void translateLeft() {
        // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
-        this.imgView.setTranslateX(-translationValue);
+        this.imgView.setTranslateX(this.imgView.getTranslateX() - translationValue);
+
     }
 
     public void translateRight() {
-        this.imgView.setTranslateX(-translationValue);
+        this.imgView.setTranslateX(this.imgView.getTranslateX() - translationValue);
     }
 
     public void translateUp() {
-        this.imgView.setTranslateY(translationValue);
+        this.imgView.setTranslateY(this.imgView.getTranslateY() + translationValue);
     }
 
     public void translateDown() {
-        this.imgView.setTranslateY(-translationValue);
+        this.imgView.setTranslateY(this.imgView.getTranslateX() - translationValue);
     }
 
     public void zoomIn() {
