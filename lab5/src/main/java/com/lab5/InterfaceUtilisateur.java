@@ -99,9 +99,10 @@ public class InterfaceUtilisateur implements IObserver {
     private Image image;
 
 
+
     private ControleurImg controleur;
     public InterfaceUtilisateur() {
-        ControleurImg controleur = ControleurImg.getInstance(this);
+
     }
     @FXML
     public void initialize() {
@@ -125,6 +126,7 @@ public class InterfaceUtilisateur implements IObserver {
                 imgView2.setImage(image);
                 imgView2.setFitWidth(535); // Set the width
                 imgView2.setFitHeight(500);
+                controleur= ControleurImg.getInstance(this);
             }
         });
     }

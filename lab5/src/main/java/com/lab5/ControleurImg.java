@@ -1,5 +1,6 @@
 package com.lab5;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
@@ -23,6 +24,7 @@ public class ControleurImg {
     private ModeleImg modeleImgMilieu;
     private ModeleImg modeleImgDroite ;
 
+
     private static ImageView imgView1;
 
     private static ImageView imgView2;
@@ -30,17 +32,6 @@ public class ControleurImg {
 
    private ModeleImg modeleImgSelectionne;
 
-
-   private void selectionementImgV1() {
-       imgView1.setOnMouseClicked(e -> {
-           modeleImgSelectionne = modeleImgMilieu;
-       });
-   }
-    private void selectionementImgV2() {
-        imgView2.setOnMouseClicked(e -> {
-            modeleImgSelectionne = modeleImgDroite;
-        });
-    }
 
 
     private ICommand translateCommandLeftModImg1 ;
@@ -61,7 +52,7 @@ public class ControleurImg {
     private ICommand zoomCommandInModImg2;
     private ICommand zoomCommandOutModImg2 ;
 
-    private ControleurImg(InterfaceUtilisateur interfaceUtilisateur ,ImageView imgView1, ImageView imgView2) {
+    private ControleurImg(InterfaceUtilisateur interfaceUtilisateur) {
         this.interfaceUtilisateur = interfaceUtilisateur;
         btnGauche = interfaceUtilisateur.getBtnGauche();
         btnDroite = interfaceUtilisateur.getBtnDroite();
@@ -94,7 +85,27 @@ public class ControleurImg {
         zoomCommandInModImg2=  new ZoomCommand(modeleImgDroite, ZoomDirection.IN);
         zoomCommandOutModImg2 =  new ZoomCommand(modeleImgDroite, ZoomDirection.OUT);
     }
-private void translateLeft() {
+    public static ControleurImg getInstance(InterfaceUtilisateur interfaceUtilisateur) {
+        if (instanceUnique == null) {
+            instanceUnique = new ControleurImg(interfaceUtilisateur );
+        }
+        return instanceUnique;
+    }
+    @FXML
+    public void selectionementImgV1() {
+        imgView1.setOnMouseClicked(e -> {
+            modeleImgSelectionne = modeleImgMilieu;
+        });
+    }
+    @FXML
+    public void selectionementImgV2() {
+        imgView2.setOnMouseClicked(e -> {
+            modeleImgSelectionne = modeleImgDroite;
+        });
+    }
+
+    @FXML
+public void translateLeft() {
     btnGauche.setOnAction(e -> {
         if(modeleImgSelectionne == modeleImgMilieu)
             translateCommandLeftModImg1.execute();
@@ -103,16 +114,18 @@ private void translateLeft() {
 
     });
     }
-    private void translateRight() {
+    @FXML
+    public void translateRight() {
         btnDroite.setOnAction(e -> {
             if(modeleImgSelectionne == modeleImgMilieu)
                 translateCommandRightModImg1.execute();
             else
                 translateCommandRightModImg2.execute();
-
-
         });
-    }private void translateUp() {
+    }
+
+    @FXML
+    public void translateUp() {
         btnBas.setOnAction(e -> {
             if(modeleImgSelectionne == modeleImgMilieu)
                 translateCommandUpModImg1.execute();
@@ -120,7 +133,9 @@ private void translateLeft() {
                 translateCommandUpModImg2.execute();
 
         });
-    }private void translateDown() {
+}
+    @FXML
+public void translateDown() {
         btnHaut.setOnAction(e -> {
             if(modeleImgSelectionne == modeleImgMilieu)
                 translateCommandDownModImg1.execute();
@@ -170,12 +185,7 @@ private void translateLeft() {
     public void Undo() {
     }
 
-    public static ControleurImg getInstance(InterfaceUtilisateur interfaceUtilisateur) {
-        if (instanceUnique == null) {
-            instanceUnique = new ControleurImg(interfaceUtilisateur,imgView1, imgView2 );
-        }
-            return instanceUnique;
-    }
+
 
     public void CopyParams(ModeleImg source, ICopyStrategy strategy) {
     }
