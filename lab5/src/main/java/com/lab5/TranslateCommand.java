@@ -10,7 +10,7 @@ public class TranslateCommand extends AbstractCommand {
     }
 
     public void execute() {
-        switch (direction) {g
+        switch (direction) {
             case LEFT:
                 modele.translateLeft();
                 break;
