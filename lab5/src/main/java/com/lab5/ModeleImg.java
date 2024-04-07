@@ -2,21 +2,23 @@ package com.lab5;
 
 import java.util.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ModeleImg {
     
     private Image image;
+
+    private ImageView imgView;
     private ArrayList<ImageView> observateurs;
     private final int translationValue =10;
     private int scaleFactor;
     private Stack<ImgMemento> mementoStack;
 
-    public ModeleImg(Image image) {
-        this.image = image;
+    public ModeleImg(ImageView imageView) {
+        imgView = imageView;
         observateurs = new ArrayList<ImageView>();
         scaleFactor = 1;
         mementoStack = new Stack<ImgMemento>();
-
     }
 
     public Image GetImage() {
@@ -43,33 +45,21 @@ public class ModeleImg {
             observer.Update();
         }
     }
-public void translate(TranslationDirection direction){
-//        switch (direction){
-//            case LEFT:
-//
-//                break;
-//            case RIGHT:
-//
-//                break;
-//            case UP:
-//
-//                break;
-//            case DOWN:
-//
-//                break;
-//        }
-}
     public void translateLeft() {
        // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
+        this.imgView.setTranslateX(-translationValue);
     }
 
     public void translateRight() {
+        this.imgView.setTranslateX(-translationValue);
     }
 
     public void translateUp() {
+        this.imgView.setTranslateY(translationValue);
     }
 
     public void translateDown() {
+        this.imgView.setTranslateX(-translationValue);
     }
 
     public void zoomIn() {
@@ -78,25 +68,25 @@ public void translate(TranslationDirection direction){
     public void zoomOut() {
     }
 
-    public void Save() {
+    public void save() {
     }
 
-    public void SaveAs() {
+    public void saveAs() {
     }
 
-    public ImgMemento CréerMemento() {
+    public ImgMemento créerMemento() {
         return new ImgMemento(image);
     }
 
-    public void SetMemento(ImgMemento m) {
+    public void setMemento(ImgMemento m) {
         mementoStack.push(m);
     }
 
-    public int GetScaleFactor() {
+    public int getScaleFactor() {
         return scaleFactor;
     }
 
-    public int GetTranslationValue() {
+    public int getTranslationValue() {
         return translationValue;
     }
 }

@@ -42,6 +42,9 @@ public class ControleurImg {
     @FXML
     private Button  btnDroite;
 
+    private ModeleImg modeleImgMilieu;
+    private ModeleImg modeleImgDroite;
+
 
 
 
@@ -52,13 +55,13 @@ public class ControleurImg {
     private CopyPasteMediator mediator;
     private Image image;
 
-    private TranslateCommand translateCommandLeft = new TranslateCommand(modImg, TranslationDirection.LEFT);
-    private TranslateCommand translateCommandRight = new TranslateCommand(modImg, TranslationDirection.RIGHT);
-    private TranslateCommand translateCommandUp = new TranslateCommand(modImg, TranslationDirection.UP);
-    private TranslateCommand translateCommandDown = new TranslateCommand(modImg, TranslationDirection.DOWN);
+    private ICommand translateCommandLeft = new TranslateCommand(modImg, TranslationDirection.LEFT);
+    private ICommand translateCommandRight = new TranslateCommand(modImg, TranslationDirection.RIGHT);
+    private ICommand translateCommandUp = new TranslateCommand(modImg, TranslationDirection.UP);
+    private ICommand translateCommandDown = new TranslateCommand(modImg, TranslationDirection.DOWN);
 
-    private ZoomCommand zoomCommandIn = new ZoomCommand(modImg, ZoomDirection.IN);
-    private ZoomCommand zoomCommandOut = new ZoomCommand(modImg, ZoomDirection.OUT);
+    private ICommand zoomCommandIn = new ZoomCommand(modImg, ZoomDirection.IN);
+    private ICommand zoomCommandOut = new ZoomCommand(modImg, ZoomDirection.OUT);
 private void translateLeft() {
     btnGauche.setOnAction(e -> {
        translateCommandLeft.execute();
@@ -159,6 +162,8 @@ private void translateLeft() {
                 imgView2.setImage(image);
                 imgView2.setFitWidth(535); // Set the width
                 imgView2.setFitHeight(500);
+                new ModeleImg(imgViewOriginal);
+                modeleImgMilieu = new ModeleImg(imgView1);
             }
         });
     }
