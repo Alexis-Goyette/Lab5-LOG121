@@ -155,7 +155,7 @@ public class ControleurImg {
 
     @FXML
     public void ZoomOut() {
-        btnZoomIn.setOnAction(e -> {
+        btnZoomOut.setOnAction(e -> {
             if(modeleImgSelectionne == modeleImgMilieu)
                 zoomCommandOutModImg1.execute();
             else
