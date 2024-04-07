@@ -52,15 +52,15 @@ public class ModeleImg {
     }
 
     public void translateRight() {
-        this.imgView.setTranslateX(this.imgView.getTranslateX() - translationValue);
+        this.imgView.setTranslateX(this.imgView.getTranslateX() + translationValue);
     }
 
     public void translateUp() {
-        this.imgView.setTranslateY(this.imgView.getTranslateY() + translationValue);
+        this.imgView.setTranslateY(this.imgView.getTranslateY() - translationValue);
     }
 
     public void translateDown() {
-        this.imgView.setTranslateY(this.imgView.getTranslateX() - translationValue);
+        this.imgView.setTranslateY(this.imgView.getTranslateY() + translationValue);
     }
 
     public void zoomIn() {
