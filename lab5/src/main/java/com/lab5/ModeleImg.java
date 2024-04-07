@@ -5,19 +5,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class ModeleImg {
-    
+
     private Image image;
 
     private ImageView imgView;
     private ArrayList<ImageView> observateurs;
-    private final int translationValue =10;
-    private int scaleFactor;
+    private final int translationValue = 10;
+    private float scaleFactor;
     private Stack<ImgMemento> mementoStack;
 
     public ModeleImg(ImageView imageView) {
         imgView = imageView;
         observateurs = new ArrayList<ImageView>();
-        scaleFactor = 1;
+        scaleFactor = 0.1f;
         mementoStack = new Stack<ImgMemento>();
     }
 
@@ -39,14 +39,15 @@ public class ModeleImg {
             observateurs.remove(index);
         }
     }
-//
-//    public void NotifyObservers() {
-//        for (var observer : observateurs) {
-//            observer.update();
-//        }
-//    }
+
+    //
+    // public void NotifyObservers() {
+    // for (var observer : observateurs) {
+    // observer.update();
+    // }
+    // }
     public void translateLeft() {
-       // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
+        // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
         this.imgView.setTranslateX(this.imgView.getTranslateX() - translationValue);
 
     }
@@ -64,9 +65,13 @@ public class ModeleImg {
     }
 
     public void zoomIn() {
+        this.imgView.setScaleX(this.imgView.getScaleX() + scaleFactor);
+        this.imgView.setScaleY(this.imgView.getScaleY() + scaleFactor);
     }
 
     public void zoomOut() {
+        this.imgView.setScaleX(this.imgView.getScaleX() - scaleFactor);
+        this.imgView.setScaleY(this.imgView.getScaleY() - scaleFactor);
     }
 
     public void save() {
@@ -83,7 +88,7 @@ public class ModeleImg {
         mementoStack.push(m);
     }
 
-    public int getScaleFactor() {
+    public float getScaleFactor() {
         return scaleFactor;
     }
 

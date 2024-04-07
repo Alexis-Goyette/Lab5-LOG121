@@ -32,25 +32,24 @@ public class InterfaceUtilisateur implements IObserver {
     @FXML
     private Button btnZoomOut;
     @FXML
-    private Button  btnBas;
+    private Button btnBas;
     @FXML
-    private Button  btnHaut;
+    private Button btnHaut;
 
     @FXML
-    private Button  btnGauche;
+    private Button btnGauche;
 
     @FXML
-    private Button  btnDroite;
-
+    private Button btnDroite;
 
     private Image image;
 
-
-
     private ControleurImg controleur;
+
     public InterfaceUtilisateur() {
 
     }
+
     @FXML
     public void initialize() {
         miCI.setOnAction(event -> {
@@ -58,7 +57,8 @@ public class InterfaceUtilisateur implements IObserver {
             fileChooser.setTitle("Open Resource File");
 
             // Set extension filter
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.png, *.jpeg)", "*.png", "*.jpeg");
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.png, *.jpeg)",
+                    "*.png", "*.jpeg");
             fileChooser.getExtensionFilters().add(extFilter);
 
             File file = fileChooser.showOpenDialog(miCI.getParentPopup().getScene().getWindow());
@@ -73,7 +73,7 @@ public class InterfaceUtilisateur implements IObserver {
                 imgView2.setImage(image);
                 imgView2.setFitWidth(535); // Set the width
                 imgView2.setFitHeight(500);
-                controleur= ControleurImg.getInstance(this);
+                controleur = ControleurImg.getInstance(this);
                 btnBas.setOnAction(innerEvent -> {
                     controleur.translateDown();
                 });
@@ -86,6 +86,12 @@ public class InterfaceUtilisateur implements IObserver {
                 btnDroite.setOnAction(innerEvent -> {
                     controleur.translateRight();
                 });
+                btnZoomIn.setOnAction(innerEvent -> {
+                    controleur.ZoomIn();
+                });
+                btnZoomOut.setOnAction(innerEvent -> {
+                    controleur.ZoomOut();
+                });
                 imgView1.setOnMouseClicked(e -> {
                     controleur.selectionementImgV1();
                 });
@@ -97,8 +103,6 @@ public class InterfaceUtilisateur implements IObserver {
         });
     }
 
-
-
     public void update() {
     }
 
@@ -107,7 +111,6 @@ public class InterfaceUtilisateur implements IObserver {
 
     public void Start(Stage primaryStage) {
     }
-
 
     public MenuButton getMbFichier() {
         return mbFichier;

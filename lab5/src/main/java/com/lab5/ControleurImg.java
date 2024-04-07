@@ -143,6 +143,26 @@ public class ControleurImg {
         });
     }
 
+    @FXML
+    public void ZoomIn() {
+        btnZoomIn.setOnAction(e -> {
+            if(modeleImgSelectionne == modeleImgMilieu)
+                zoomCommandInModImg1.execute();
+            else
+                zoomCommandInModImg2.execute();
+        });
+    }
+
+    @FXML
+    public void ZoomOut() {
+        btnZoomIn.setOnAction(e -> {
+            if(modeleImgSelectionne == modeleImgMilieu)
+                zoomCommandOutModImg1.execute();
+            else
+                zoomCommandOutModImg2.execute();
+        });
+    }
+
 
 
 
