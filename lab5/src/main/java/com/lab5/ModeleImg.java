@@ -7,14 +7,13 @@ public class ModeleImg {
     
     private Image image;
     private ArrayList<ImageView> observateurs;
-    private int translationValue;
+    private final int translationValue =10;
     private int scaleFactor;
     private Stack<ImgMemento> mementoStack;
 
     public ModeleImg(Image image) {
         this.image = image;
         observateurs = new ArrayList<ImageView>();
-        translationValue = 0;
         scaleFactor = 1;
         mementoStack = new Stack<ImgMemento>();
 
@@ -44,23 +43,39 @@ public class ModeleImg {
             observer.Update();
         }
     }
-
-    public void TranslateLeft() {
+public void translate(TranslationDirection direction){
+//        switch (direction){
+//            case LEFT:
+//
+//                break;
+//            case RIGHT:
+//
+//                break;
+//            case UP:
+//
+//                break;
+//            case DOWN:
+//
+//                break;
+//        }
+}
+    public void translateLeft() {
+       // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
     }
 
-    public void TranslateRight() {
+    public void translateRight() {
     }
 
-    public void TranslateUp() {
+    public void translateUp() {
     }
 
-    public void TranslateDown() {
+    public void translateDown() {
     }
 
-    public void ZoomIn() {
+    public void zoomIn() {
     }
 
-    public void ZoomOut() {
+    public void zoomOut() {
     }
 
     public void Save() {

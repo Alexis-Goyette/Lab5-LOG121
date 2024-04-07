@@ -1,12 +1,14 @@
 package com.lab5;
 
 public class ZoomCommand extends AbstractCommand {
-
-    public ZoomCommand(ModeleImg modele) {
+ZoomDirection direction;
+    public ZoomCommand(ModeleImg modele, ZoomDirection direction) {
         super(modele);
+       this.direction = direction;
     }
 
-    public void Execute() {
+    public void execute() {
+
     }
 
 }

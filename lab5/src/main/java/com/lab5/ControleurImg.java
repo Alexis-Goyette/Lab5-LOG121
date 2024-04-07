@@ -1,6 +1,7 @@
 package com.lab5;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -26,6 +27,23 @@ public class ControleurImg {
     private ImageView imgView1;
     @FXML
     private ImageView imgView2;
+    @FXML
+    private Button btnZoomIn;
+    @FXML
+    private Button btnZoomOut;
+    @FXML
+    private Button  btnBas;
+    @FXML
+    private Button  btnHaut;
+
+    @FXML
+    private Button  btnGauche;
+
+    @FXML
+    private Button  btnDroite;
+
+
+
 
     private ModeleImg modImg;
     private int indexCommand;
@@ -33,6 +51,37 @@ public class ControleurImg {
     private static ControleurImg instanceUnique;
     private CopyPasteMediator mediator;
     private Image image;
+
+    private TranslateCommand translateCommandLeft = new TranslateCommand(modImg, TranslationDirection.LEFT);
+    private TranslateCommand translateCommandRight = new TranslateCommand(modImg, TranslationDirection.RIGHT);
+    private TranslateCommand translateCommandUp = new TranslateCommand(modImg, TranslationDirection.UP);
+    private TranslateCommand translateCommandDown = new TranslateCommand(modImg, TranslationDirection.DOWN);
+
+    private ZoomCommand zoomCommandIn = new ZoomCommand(modImg, ZoomDirection.IN);
+    private ZoomCommand zoomCommandOut = new ZoomCommand(modImg, ZoomDirection.OUT);
+private void translateLeft() {
+    btnGauche.setOnAction(e -> {
+       translateCommandLeft.execute();
+
+    });
+    }
+    private void translateRight() {
+        btnGauche.setOnAction(e -> {
+            translateCommandRight.execute();
+
+        });
+    }private void translateUp() {
+        btnGauche.setOnAction(e -> {
+            translateCommandUp.execute();
+
+        });
+    }private void translateDown() {
+        btnGauche.setOnAction(e -> {
+            translateCommandDown.execute();
+
+        });
+    }
+
 
     private ControleurImg(ModeleImg model) {
         modImg = model;
@@ -42,16 +91,16 @@ public class ControleurImg {
     public void TranslateImage(TranslationDirection.translationDirection direction) {
         switch (direction) {
             case LEFT:
-                modImg.TranslateLeft();
+                modImg.translateLeft();
                 break;
             case RIGHT:
-                modImg.TranslateRight();
+                modImg.translateRight();
                 break;
             case UP:
-                modImg.TranslateUp();
+                modImg.translateUp();
                 break;
             case DOWN:
-                modImg.TranslateDown();
+                modImg.translateDown();
                 break;
         }
     }
@@ -59,10 +108,10 @@ public class ControleurImg {
     public void ZoomImage(ZoomDirection.zoomDirection direction) {
         switch (direction) {
             case IN:
-                modImg.ZoomIn();
+                modImg.zoomIn();
                 break;
             case OUT:
-                modImg.ZoomOut();
+                modImg.zoomOut();
                 break;
         }
     }

@@ -1,6 +1,8 @@
 package com.lab5;
 
-public abstract class AbstractCommand implements ICommand {
+import javafx.event.ActionEvent;
+
+public abstract class AbstractCommand extends ActionEvent {
 
     protected ModeleImg modele;
 
