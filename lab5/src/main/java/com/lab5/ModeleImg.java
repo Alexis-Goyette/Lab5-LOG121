@@ -39,12 +39,12 @@ public class ModeleImg {
             observateurs.remove(index);
         }
     }
-
-    public void NotifyObservers() {
-        for (var observer : observateurs) {
-            observer.Update();
-        }
-    }
+//
+//    public void NotifyObservers() {
+//        for (var observer : observateurs) {
+//            observer.update();
+//        }
+//    }
     public void translateLeft() {
        // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
         this.imgView.setTranslateX(-translationValue);
@@ -59,7 +59,7 @@ public class ModeleImg {
     }
 
     public void translateDown() {
-        this.imgView.setTranslateX(-translationValue);
+        this.imgView.setTranslateY(-translationValue);
     }
 
     public void zoomIn() {

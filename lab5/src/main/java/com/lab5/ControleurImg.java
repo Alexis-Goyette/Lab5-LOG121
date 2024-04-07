@@ -1,123 +1,165 @@
 package com.lab5;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
-import javafx.stage.FileChooser;
 import javafx.scene.image.ImageView;
-import java.io.File;
 
 public class ControleurImg {
     public ControleurImg() {
 
     }
-    @FXML
-    private MenuButton mbFichier;
-    @FXML
-    private MenuButton mbEdition;
-    @FXML
-    private MenuButton mbPP;
-    @FXML
-    private MenuItem miCI;
-    @FXML
-    private ImageView imgViewOriginal;
-    @FXML
-    private ImageView imgView1;
-    @FXML
-    private ImageView imgView2;
-    @FXML
-    private Button btnZoomIn;
-    @FXML
-    private Button btnZoomOut;
-    @FXML
-    private Button  btnBas;
-    @FXML
-    private Button  btnHaut;
 
-    @FXML
-    private Button  btnGauche;
+     private static ControleurImg instanceUnique ;
 
-    @FXML
-    private Button  btnDroite;
+    private int indexCommand;
+    private CopyPasteMediator mediator;
+    private static InterfaceUtilisateur interfaceUtilisateur ;
+    private Button btnGauche;
+    private Button btnDroite;
+    private Button btnHaut;
+    private  Button btnBas;
+    private Button btnZoomIn ;
+    private   Button btnZoomOut;
 
     private ModeleImg modeleImgMilieu;
-    private ModeleImg modeleImgDroite;
+    private ModeleImg modeleImgDroite ;
+
+    private static ImageView imgView1;
+
+    private static ImageView imgView2;
+
+
+   private ModeleImg modeleImgSelectionne;
+
+
+   private void selectionementImgV1() {
+       imgView1.setOnMouseClicked(e -> {
+           modeleImgSelectionne = modeleImgMilieu;
+       });
+   }
+    private void selectionementImgV2() {
+        imgView2.setOnMouseClicked(e -> {
+            modeleImgSelectionne = modeleImgDroite;
+        });
+    }
+
+
+    private ICommand translateCommandLeftModImg1 ;
+    private ICommand translateCommandRightModImg1 ;
+    private ICommand translateCommandUpModImg1;
+    private ICommand translateCommandDownModImg1 ;
+
+    private ICommand zoomCommandInModImg1;
+    private ICommand zoomCommandOutModImg1 ;
 
 
 
+    private ICommand translateCommandLeftModImg2;
+    private ICommand translateCommandRightModImg2 ;
+    private ICommand translateCommandUpModImg2 ;
+    private ICommand translateCommandDownModImg2 ;
 
-    private ModeleImg modImg;
-    private int indexCommand;
-    private ICommand command;
-    private static ControleurImg instanceUnique;
-    private CopyPasteMediator mediator;
-    private Image image;
+    private ICommand zoomCommandInModImg2;
+    private ICommand zoomCommandOutModImg2 ;
 
-    private ICommand translateCommandLeft = new TranslateCommand(modImg, TranslationDirection.LEFT);
-    private ICommand translateCommandRight = new TranslateCommand(modImg, TranslationDirection.RIGHT);
-    private ICommand translateCommandUp = new TranslateCommand(modImg, TranslationDirection.UP);
-    private ICommand translateCommandDown = new TranslateCommand(modImg, TranslationDirection.DOWN);
+    private ControleurImg(InterfaceUtilisateur interfaceUtilisateur ,ImageView imgView1, ImageView imgView2) {
+        this.interfaceUtilisateur = interfaceUtilisateur;
+        btnGauche = interfaceUtilisateur.getBtnGauche();
+        btnDroite = interfaceUtilisateur.getBtnDroite();
+        btnHaut = interfaceUtilisateur.getBtnHaut();
+        btnBas= interfaceUtilisateur.getBtnBas();
+        btnZoomIn = interfaceUtilisateur.getBtnZoomIn();
+        btnZoomOut = interfaceUtilisateur.getBtnZoomOut();
 
-    private ICommand zoomCommandIn = new ZoomCommand(modImg, ZoomDirection.IN);
-    private ICommand zoomCommandOut = new ZoomCommand(modImg, ZoomDirection.OUT);
+        imgView1= interfaceUtilisateur.getImgView1();
+        imgView2 = interfaceUtilisateur.getImgView2();
+
+        this.modeleImgMilieu = new ModeleImg(imgView1);
+        this.modeleImgDroite = new ModeleImg(imgView2);
+
+        translateCommandLeftModImg1 =  new TranslateCommand(modeleImgMilieu, TranslationDirection.LEFT);
+        translateCommandRightModImg1 =  new TranslateCommand(modeleImgMilieu, TranslationDirection.RIGHT);
+        translateCommandUpModImg1=  new TranslateCommand(modeleImgMilieu, TranslationDirection.UP);
+        translateCommandDownModImg1 =  new TranslateCommand(modeleImgMilieu, TranslationDirection.DOWN);
+
+        zoomCommandInModImg1=  new ZoomCommand(modeleImgMilieu, ZoomDirection.IN);
+        zoomCommandOutModImg1 =  new ZoomCommand(modeleImgMilieu, ZoomDirection.OUT);
+
+
+
+        translateCommandLeftModImg2=  new TranslateCommand(modeleImgDroite, TranslationDirection.LEFT);
+        translateCommandRightModImg2 =  new TranslateCommand(modeleImgDroite, TranslationDirection.RIGHT);
+        translateCommandUpModImg2 =  new TranslateCommand(modeleImgDroite, TranslationDirection.UP);
+        translateCommandDownModImg2 =  new TranslateCommand(modeleImgDroite, TranslationDirection.DOWN);
+
+        zoomCommandInModImg2=  new ZoomCommand(modeleImgDroite, ZoomDirection.IN);
+        zoomCommandOutModImg2 =  new ZoomCommand(modeleImgDroite, ZoomDirection.OUT);
+    }
 private void translateLeft() {
     btnGauche.setOnAction(e -> {
-       translateCommandLeft.execute();
+        if(modeleImgSelectionne == modeleImgMilieu)
+            translateCommandLeftModImg1.execute();
+        else
+            translateCommandLeftModImg2.execute();
 
     });
     }
     private void translateRight() {
-        btnGauche.setOnAction(e -> {
-            translateCommandRight.execute();
+        btnDroite.setOnAction(e -> {
+            if(modeleImgSelectionne == modeleImgMilieu)
+                translateCommandRightModImg1.execute();
+            else
+                translateCommandRightModImg2.execute();
+
 
         });
     }private void translateUp() {
-        btnGauche.setOnAction(e -> {
-            translateCommandUp.execute();
+        btnBas.setOnAction(e -> {
+            if(modeleImgSelectionne == modeleImgMilieu)
+                translateCommandUpModImg1.execute();
+            else
+                translateCommandUpModImg2.execute();
 
         });
     }private void translateDown() {
-        btnGauche.setOnAction(e -> {
-            translateCommandDown.execute();
+        btnHaut.setOnAction(e -> {
+            if(modeleImgSelectionne == modeleImgMilieu)
+                translateCommandDownModImg1.execute();
+            else
+                translateCommandDownModImg2.execute();
 
         });
     }
 
 
-    private ControleurImg(ModeleImg model) {
-        modImg = model;
-        instanceUnique = this;
-    }
 
-    public void TranslateImage(TranslationDirection.translationDirection direction) {
-        switch (direction) {
-            case LEFT:
-                modImg.translateLeft();
-                break;
-            case RIGHT:
-                modImg.translateRight();
-                break;
-            case UP:
-                modImg.translateUp();
-                break;
-            case DOWN:
-                modImg.translateDown();
-                break;
-        }
-    }
 
-    public void ZoomImage(ZoomDirection.zoomDirection direction) {
-        switch (direction) {
-            case IN:
-                modImg.zoomIn();
-                break;
-            case OUT:
-                modImg.zoomOut();
-                break;
-        }
-    }
+//    public void TranslateImage(TranslationDirection.translationDirection direction) {
+//        switch (direction) {
+//            case LEFT:
+//                modImg.translateLeft();
+//                break;
+//            case RIGHT:
+//                modImg.translateRight();
+//                break;
+//            case UP:
+//                modImg.translateUp();
+//                break;
+//            case DOWN:
+//                modImg.translateDown();
+//                break;
+//        }
+//    }
+//
+//    public void ZoomImage(ZoomDirection.zoomDirection direction) {
+//        switch (direction) {
+//            case IN:
+//                modImg.zoomIn();
+//                break;
+//            case OUT:
+//                modImg.zoomOut();
+//                break;
+//        }
+//    }
 
     public void SaveImage() {
     }
@@ -128,8 +170,11 @@ private void translateLeft() {
     public void Undo() {
     }
 
-    public static ControleurImg GetInstance() {
-        return instanceUnique;
+    public static ControleurImg getInstance(InterfaceUtilisateur interfaceUtilisateur) {
+        if (instanceUnique == null) {
+            instanceUnique = new ControleurImg(interfaceUtilisateur,imgView1, imgView2 );
+        }
+            return instanceUnique;
     }
 
     public void CopyParams(ModeleImg source, ICopyStrategy strategy) {
@@ -137,36 +182,12 @@ private void translateLeft() {
 
     public void PasteParams(ModeleImg source, ModeleImg destination) {
     }
+
+
     // je suis pas sûr si le type de "source" et "destination" est bon,
     // il était pas marqué dans l'uml, à changer au besoin
 
-    @FXML
-    public void initialize() {
-        miCI.setOnAction(event -> {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Open Resource File");
 
-            // Set extension filter
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.png, *.jpeg)", "*.png", "*.jpeg");
-            fileChooser.getExtensionFilters().add(extFilter);
-
-            File file = fileChooser.showOpenDialog(miCI.getParentPopup().getScene().getWindow());
-            if (file != null) {
-                image = new Image(file.toURI().toString());
-                imgViewOriginal.setImage(image);
-                imgViewOriginal.setFitWidth(535); // Set the width
-                imgViewOriginal.setFitHeight(500);
-                imgView1.setImage(image);
-                imgView1.setFitWidth(535); // Set the width
-                imgView1.setFitHeight(500);
-                imgView2.setImage(image);
-                imgView2.setFitWidth(535); // Set the width
-                imgView2.setFitHeight(500);
-                new ModeleImg(imgViewOriginal);
-                modeleImgMilieu = new ModeleImg(imgView1);
-            }
-        });
-    }
 
 
 }

@@ -2,5 +2,5 @@ package com.lab5;
 
 public interface ICommand {
 
-    public void execute();
+    public abstract void execute();
 }

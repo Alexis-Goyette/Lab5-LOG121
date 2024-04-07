@@ -6,7 +6,7 @@ public class UndoCommand extends AbstractCommand {
         super(modele);
     }
 
-    public void Execute() {
+    public void execute() {
     }
 
 }

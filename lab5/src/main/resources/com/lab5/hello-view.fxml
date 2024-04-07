@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="TOP_LEFT" hgap="10" prefHeight="536.0" prefWidth="1243.0" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab5.ControleurImg">
+<GridPane alignment="TOP_LEFT" hgap="10" prefHeight="536.0" prefWidth="1243.0" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab5.InterfaceUtilisateur">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
     </padding>

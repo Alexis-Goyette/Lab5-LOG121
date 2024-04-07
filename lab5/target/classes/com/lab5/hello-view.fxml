@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="TOP_LEFT" hgap="10" prefHeight="536.0" prefWidth="1243.0" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab5.ControleurImg">
+<GridPane alignment="TOP_LEFT" hgap="10" prefHeight="536.0" prefWidth="1243.0" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab5.InterfaceUtilisateur">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
@@ -45,12 +45,12 @@
       <ImageView fx:id="imgView2" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
         <ButtonBar buttonOrder="L_E+U+OCAHNRFX" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
             <buttons>
-                <Button mnemonicParsing="false" text="&#x2190;" /> <!-- Right arrow -->
-                <Button mnemonicParsing="false" text="↑" /> <!-- Up arrow -->
-                <Button mnemonicParsing="false" text="→" /> <!-- Right arrow -->
-                <Button mnemonicParsing="false" text="↓" /> <!-- Down arrow -->
-                <Button mnemonicParsing="false" text="+" />
-                <Button mnemonicParsing="false" text="-" />
+                <Button fx:id="btnGauche" mnemonicParsing="false" text="←" /> <!-- Right arrow -->
+                <Button fx:id="btnHaut" mnemonicParsing="false" text="↑" /> <!-- Up arrow -->
+                <Button fx:id="btnDroite" mnemonicParsing="false" text="→" /> <!-- Right arrow -->
+                <Button fx:id="btnBas" mnemonicParsing="false" text="↓" /> <!-- Down arrow -->
+                <Button fx:id="btnZoomIn" mnemonicParsing="false" text="+" />
+                <Button fx:id="btnZoomOut" mnemonicParsing="false" text="-" />
             </buttons>
          <GridPane.margin>
             <Insets right="35.0" />
