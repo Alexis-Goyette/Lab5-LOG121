@@ -1,5 +1,6 @@
 package com.lab5;
 
+import java.awt.Image;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ public class ControleurImg {
     private Button btnZoomIn;
     private Button btnZoomOut;
     private MenuItem miSauvegarderImage;
+    private MenuItem miSauvergarderPerspective;
     private MenuItem miUndo;
 
     private ModeleImg modeleImgMilieu;
@@ -33,6 +35,8 @@ public class ControleurImg {
     private static ImageView imgView1;
 
     private static ImageView imgView2;
+
+    private static ImageView imgViewOriginal;
 
     private ModeleImg modeleImgSelectionne;
 
@@ -54,6 +58,8 @@ public class ControleurImg {
 
     private ICommand saveAsCommandImg1;
     private ICommand saveAsCommandImg2;
+    private ICommand saveCommandImg1;
+    private ICommand saveCommandImg2;
 
     private ICommand undoCommandImg1;
     private ICommand undoCommandImg2;
@@ -67,10 +73,12 @@ public class ControleurImg {
         btnZoomIn = interfaceUtilisateur.getBtnZoomIn();
         btnZoomOut = interfaceUtilisateur.getBtnZoomOut();
         miSauvegarderImage = interfaceUtilisateur.getMiSauvegarderImage();
+        miSauvergarderPerspective = interfaceUtilisateur.getMiSauvergarderPerspective();
         miUndo = interfaceUtilisateur.getMiUndo();
 
         imgView1 = interfaceUtilisateur.getImgView1();
         imgView2 = interfaceUtilisateur.getImgView2();
+        imgViewOriginal = interfaceUtilisateur.getImgViewOriginal();
 
         this.modeleImgMilieu = new ModeleImg(imgView1, interfaceUtilisateur);
         this.modeleImgDroite = new ModeleImg(imgView2, interfaceUtilisateur);
@@ -84,6 +92,7 @@ public class ControleurImg {
         zoomCommandOutModImg1 = new ZoomCommand(modeleImgMilieu, ZoomDirection.OUT);
 
         saveAsCommandImg1 = new SaveAsCommand(modeleImgMilieu);
+        saveCommandImg1 = new SaveCommand(modeleImgMilieu);
 
         undoCommandImg1 = new UndoCommand(modeleImgMilieu);
 
@@ -96,6 +105,7 @@ public class ControleurImg {
         zoomCommandOutModImg2 = new ZoomCommand(modeleImgDroite, ZoomDirection.OUT);
 
         saveAsCommandImg2 = new SaveAsCommand(modeleImgDroite);
+        saveCommandImg1 = new SaveCommand(modeleImgDroite);
 
         undoCommandImg2 = new UndoCommand(modeleImgDroite);
     }
@@ -230,6 +240,20 @@ public class ControleurImg {
     }
 
     public void SaveImage() {
+        miSauvergarderPerspective.setOnAction(e -> {
+            if (modeleImgSelectionne == modeleImgMilieu)
+                try {
+                    saveCommandImg1.execute();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            else
+                try {
+                    saveCommandImg2.execute();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+        });
     }
 
     public void SaveAs() {

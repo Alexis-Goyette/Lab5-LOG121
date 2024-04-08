@@ -1,5 +1,6 @@
 package com.lab5;
 
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,14 +8,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.awt.image.BufferedImage;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Stack;
 
 import javax.imageio.ImageIO;
-import javafx.scene.image.Image;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 
 public class ModeleImg {
     private IObserver interfaceUtilisateur;
@@ -94,12 +95,14 @@ public class ModeleImg {
     }
 
     public void zoomOut() {
+        // setMemento(créerMemento());
         mementoStack.push(créerMemento());
         this.zoomFactor -= zoomTranlationValue;
         notifyObservers();
     }
 
     public void save() {
+
     }
 
     public void saveAs() throws MalformedURLException, IOException {
@@ -109,11 +112,14 @@ public class ModeleImg {
 
         File selectedFile = fileChooser.showDialog(null);
         if (selectedFile != null) {
-            String urlString = imgView.getImage().getUrl();
-            InputStream inputStream = new URL(urlString).openStream();
-            File path = new File(selectedFile.getAbsolutePath() + "/image.jpg");
 
-            Files.copy(inputStream, path.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            var wi = imgView.snapshot(null, null);
+            File file = new File(selectedFile.getAbsolutePath() + "/image.png");
+            RenderedImage renderedImage = SwingFXUtils.fromFXImage(wi, null);
+            ImageIO.write(
+                    renderedImage,
+                    "png",
+                    file);
         }
 
     }
