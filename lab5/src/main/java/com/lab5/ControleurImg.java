@@ -13,7 +13,7 @@ public class ControleurImg {
 
     private int indexCommand;
     private CopyPasteMediator mediator;
-    private static InterfaceUtilisateur interfaceUtilisateur ;
+    private static InterfaceUtilisateur interfaceUtilisateur;
     private Button btnGauche;
     private Button btnDroite;
     private Button btnHaut;
@@ -64,8 +64,8 @@ public class ControleurImg {
         imgView1= interfaceUtilisateur.getImgView1();
         imgView2 = interfaceUtilisateur.getImgView2();
 
-        this.modeleImgMilieu = new ModeleImg(imgView1);
-        this.modeleImgDroite = new ModeleImg(imgView2);
+        this.modeleImgMilieu = new ModeleImg(imgView1, interfaceUtilisateur);
+        this.modeleImgDroite = new ModeleImg(imgView2, interfaceUtilisateur);
 
         translateCommandLeftModImg1 =  new TranslateCommand(modeleImgMilieu, TranslationDirection.LEFT);
         translateCommandRightModImg1 =  new TranslateCommand(modeleImgMilieu, TranslationDirection.RIGHT);
@@ -143,36 +143,26 @@ public class ControleurImg {
         });
     }
 
+    @FXML
+    public void zoomIn() {
+        btnZoomIn.setOnAction(e -> {
+            if(modeleImgSelectionne == modeleImgMilieu)
+                zoomCommandInModImg1.execute();
+            else
+                zoomCommandInModImg2.execute();
+        });
+    }
 
+    @FXML
+    public void zoomOut() {
+        btnZoomOut.setOnAction(e -> {
+            if(modeleImgSelectionne == modeleImgMilieu)
+                zoomCommandOutModImg1.execute();
+            else
+                zoomCommandOutModImg2.execute();
+        });
+    }
 
-
-//    public void TranslateImage(TranslationDirection.translationDirection direction) {
-//        switch (direction) {
-//            case LEFT:
-//                modImg.translateLeft();
-//                break;
-//            case RIGHT:
-//                modImg.translateRight();
-//                break;
-//            case UP:
-//                modImg.translateUp();
-//                break;
-//            case DOWN:
-//                modImg.translateDown();
-//                break;
-//        }
-//    }
-//
-//    public void ZoomImage(ZoomDirection.zoomDirection direction) {
-//        switch (direction) {
-//            case IN:
-//                modImg.zoomIn();
-//                break;
-//            case OUT:
-//                modImg.zoomOut();
-//                break;
-//        }
-//    }
 
     public void SaveImage() {
     }

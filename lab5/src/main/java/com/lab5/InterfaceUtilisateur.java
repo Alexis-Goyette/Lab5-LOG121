@@ -74,38 +74,25 @@ public class InterfaceUtilisateur implements IObserver {
                 imgView2.setFitWidth(535); // Set the width
                 imgView2.setFitHeight(500);
                 controleur= ControleurImg.getInstance(this);
-                btnBas.setOnAction(innerEvent -> {
-                    controleur.translateDown();
-                });
-                btnHaut.setOnAction(innerEvent -> {
-                    controleur.translateUp();
-                });
-                btnGauche.setOnAction(innerEvent -> {
-                    controleur.translateLeft();
-                });
-                btnDroite.setOnAction(innerEvent -> {
-                    controleur.translateRight();
-                });
-                imgView1.setOnMouseClicked(e -> {
-                    controleur.selectionementImgV1();
-                });
-                imgView2.setOnMouseClicked(e -> {
-                    controleur.selectionementImgV2();
-                });
-
+                controleur.translateDown();
+                controleur.translateUp();
+                controleur.translateLeft();
+                controleur.translateRight();
+                controleur.zoomIn();
+                controleur.zoomOut();
+                controleur.selectionementImgV1();
+                controleur.selectionementImgV2();
             }
         });
     }
 
 
 
-    public void update() {
-    }
-
-    public void DisplayImage() {
-    }
-
-    public void Start(Stage primaryStage) {
+    public void update(ModeleImg modele) {
+        modele.getImageView().setTranslateX(modele.getXTranslationValue());
+        modele.getImageView().setTranslateY(modele.getYTranslationValue());
+        modele.getImageView().setScaleX(modele.getScaleFactor());
+        modele.getImageView().setScaleY(modele.getScaleFactor());
     }
 
 

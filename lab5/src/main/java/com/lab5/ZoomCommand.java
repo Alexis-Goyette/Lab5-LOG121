@@ -8,7 +8,14 @@ ZoomDirection direction;
     }
 
     public void execute() {
-
+        switch (direction) {
+            case IN:
+                modele.zoomIn();
+                break;
+            case OUT:
+                modele.zoomOut();
+                break;
+        }
     }
 
 }

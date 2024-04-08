@@ -5,68 +5,85 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class ModeleImg {
+
+    private IObserver interfaceUtilisateur;
     
     private Image image;
 
     private ImageView imgView;
-    private ArrayList<ImageView> observateurs;
+    private ArrayList<InterfaceUtilisateur> observateurs;
     private final int translationValue =10;
-    private int scaleFactor;
+    private final float zoomTranlationValue = 0.1f;
     private Stack<ImgMemento> mementoStack;
 
-    public ModeleImg(ImageView imageView) {
+    private float x,y, zoomFactor;
+
+    public ModeleImg(ImageView imageView, InterfaceUtilisateur interfaceUtilisateur){
         imgView = imageView;
-        observateurs = new ArrayList<ImageView>();
-        scaleFactor = 1;
+        observateurs = new ArrayList<InterfaceUtilisateur>();
+        zoomFactor = 1;
         mementoStack = new Stack<ImgMemento>();
+        this.interfaceUtilisateur = interfaceUtilisateur;
+        addObserver(interfaceUtilisateur);
     }
 
-    public Image GetImage() {
-        return image;
+    public ImageView getImageView() {
+        return imgView;
     }
 
-    public void SetImage(Image i) {
+    public void setImage(Image i) {
         image = i;
     }
 
-    public void AddObserver(ImageView observer) {
+    public void addObserver(InterfaceUtilisateur observer) {
         observateurs.add(observer);
     }
 
-    public void RemoveObserver(ImageView observer) {
+    public void removeObserver(ImageView observer) {
         int index = observateurs.indexOf(observer);
         if (index > 0) {
             observateurs.remove(index);
         }
     }
-//
-//    public void NotifyObservers() {
-//        for (var observer : observateurs) {
-//            observer.update();
-//        }
-//    }
+
+    public void notifyObservers() {
+        for (var observer : observateurs) {
+            observer.update(this);
+        }
+   }
     public void translateLeft() {
        // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
-        this.imgView.setTranslateX(this.imgView.getTranslateX() - translationValue);
-
+        // this.imgView.setTranslateX(this.imgView.getTranslateX() - translationValue);
+        this.x-=translationValue;
+        notifyObservers();
     }
 
     public void translateRight() {
-        this.imgView.setTranslateX(this.imgView.getTranslateX() + translationValue);
+//        this.imgView.setTranslateX(this.imgView.getTranslateX() + translationValue);
+        this.x+=translationValue;
+        notifyObservers();
     }
 
     public void translateUp() {
-        this.imgView.setTranslateY(this.imgView.getTranslateY() - translationValue);
+//        this.imgView.setTranslateY(this.imgView.getTranslateY() - translationValue);
+        this.y-=translationValue;
+        notifyObservers();
     }
 
     public void translateDown() {
-        this.imgView.setTranslateY(this.imgView.getTranslateY() + translationValue);
+//        this.imgView.setTranslateY(this.imgView.getTranslateY() + translationValue);
+        this.y+=translationValue;
+        notifyObservers();
     }
 
     public void zoomIn() {
+        this.zoomFactor += zoomTranlationValue;
+        notifyObservers();
     }
 
     public void zoomOut() {
+        this.zoomFactor -= zoomTranlationValue;
+        notifyObservers();
     }
 
     public void save() {
@@ -83,11 +100,15 @@ public class ModeleImg {
         mementoStack.push(m);
     }
 
-    public int getScaleFactor() {
-        return scaleFactor;
+    public float getScaleFactor() {
+        return zoomFactor;
     }
 
-    public int getTranslationValue() {
-        return translationValue;
+    public float getXTranslationValue() {
+        return x;
+    }
+
+    public float getYTranslationValue() {
+        return y;
     }
 }

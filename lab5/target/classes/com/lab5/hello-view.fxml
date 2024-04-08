@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.control.ScrollPane?>
 <GridPane alignment="TOP_LEFT" hgap="10" prefHeight="536.0" prefWidth="1243.0" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab5.InterfaceUtilisateur">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
@@ -40,9 +41,21 @@
             <Insets left="150.0" />
          </GridPane.margin>
         </MenuButton>
-      <ImageView fx:id="imgViewOriginal" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <ImageView fx:id="imgView1" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <ImageView fx:id="imgView2" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        <ScrollPane GridPane.columnIndex="1" GridPane.rowIndex="2" hbarPolicy="NEVER" vbarPolicy="NEVER">
+            <content>
+                <ImageView fx:id="imgViewOriginal" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" />
+            </content>
+        </ScrollPane>
+        <ScrollPane GridPane.columnIndex="2" GridPane.rowIndex="2" hbarPolicy="NEVER" vbarPolicy="NEVER">
+            <content>
+                <ImageView fx:id="imgView1" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" />
+            </content>
+        </ScrollPane>
+        <ScrollPane GridPane.columnIndex="3" GridPane.rowIndex="2" hbarPolicy="NEVER" vbarPolicy="NEVER">
+            <content>
+                <ImageView fx:id="imgView2" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" />
+            </content>
+        </ScrollPane>
         <ButtonBar buttonOrder="L_E+U+OCAHNRFX" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
             <buttons>
                 <Button fx:id="btnGauche" mnemonicParsing="false" text="←" /> <!-- Right arrow -->
