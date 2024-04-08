@@ -126,6 +126,13 @@ public class ModeleImg {
         notifyObservers();
     }
 
+    public void chargerPerspective(ImgMemento memento){
+        this.x = (float) memento.getX();
+        this.y = (float) memento.getY();
+        this.zoomFactor = (float) memento.getZoom();
+        notifyObservers();
+    }
+
     public ImgMemento créerMemento() {
         return new ImgMemento(x, y, zoomFactor);
     }

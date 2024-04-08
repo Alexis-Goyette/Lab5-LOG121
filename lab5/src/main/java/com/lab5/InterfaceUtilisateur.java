@@ -44,6 +44,8 @@ public class InterfaceUtilisateur implements IObserver {
     private Button btnBas;
     @FXML
     private Button btnHaut;
+    @FXML
+    private MenuItem miChoisirStrat;
 
     @FXML
     private Button btnGauche;
@@ -176,5 +178,9 @@ public class InterfaceUtilisateur implements IObserver {
 
     public Button getBtnDroite() {
         return btnDroite;
+    }
+
+    public MenuItem getMiChoisirStrat(){
+        return miChoisirStrat;
     }
 }

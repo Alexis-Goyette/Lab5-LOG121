@@ -36,7 +36,7 @@
         </MenuButton>
         <MenuButton fx:id="mbPP" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" text="Presse-Papier" GridPane.columnIndex="1">
             <items>
-                <MenuItem text="Choisir stratégie" />
+                <MenuItem fx:id="miChoisirStrat" text="Choisir stratégie" />
             </items>
          <GridPane.margin>
             <Insets left="150.0" />

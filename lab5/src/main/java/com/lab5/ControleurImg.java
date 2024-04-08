@@ -28,6 +28,7 @@ public class ControleurImg {
     private MenuItem miUndo;
     private MenuItem miRedo;
     private MenuItem miCP;
+    private MenuItem miChoisirStrat;
 
     private ModeleImg modeleImgMilieu;
     private ModeleImg modeleImgDroite;
@@ -82,6 +83,7 @@ public class ControleurImg {
         miUndo = interfaceUtilisateur.getMiUndo();
         miRedo = interfaceUtilisateur.getMiRedo();
         miCP = interfaceUtilisateur.getMiCP();
+        miChoisirStrat = interfaceUtilisateur.getMiChoisirStrat();
         perspectiveSauvegardé = new ImgMemento(1f, 1f, 1f);
 
         imgView1 = interfaceUtilisateur.getImgView1();
@@ -266,16 +268,9 @@ public class ControleurImg {
 
     public void Chargerperspective() {
         miCP.setOnAction(e -> {
-            modeleImgMilieu.setXTranslationValue(perspectiveSauvegardé.getX());
-            modeleImgMilieu.setYTranslationValue(perspectiveSauvegardé.getY());
-            modeleImgMilieu.setZoomFactor(perspectiveSauvegardé.getZoom());
+            modeleImgMilieu.chargerPerspective(perspectiveSauvegardé);
 
-            modeleImgDroite.setXTranslationValue(perspectiveSauvegardé.getX());
-            modeleImgDroite.setYTranslationValue(perspectiveSauvegardé.getY());
-            modeleImgDroite.setZoomFactor(perspectiveSauvegardé.getZoom());
-
-            modeleImgMilieu.notifyObservers();
-            modeleImgDroite.notifyObservers();
+            modeleImgDroite.chargerPerspective(perspectiveSauvegardé);
         });
     }
 
