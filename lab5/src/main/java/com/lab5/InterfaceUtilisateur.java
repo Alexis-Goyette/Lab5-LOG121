@@ -95,8 +95,8 @@ public class InterfaceUtilisateur implements IObserver {
     public void update(ModeleImg modele) {
         modele.getImageView().setTranslateX(modele.getXTranslationValue());
         modele.getImageView().setTranslateY(modele.getYTranslationValue());
-        modele.getImageView().setScaleX(modele.getScaleFactor());
-        modele.getImageView().setScaleY(modele.getScaleFactor());
+        modele.getImageView().setScaleX(modele.getZoomFactor());
+        modele.getImageView().setScaleY(modele.getZoomFactor());
     }
 
     public MenuButton getMbFichier() {

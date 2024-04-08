@@ -119,7 +119,6 @@ public class ModeleImg {
     }
 
     public void Undo() {
-        System.out.println("yo");
         var image = mementoStack.pop();
         this.x = (float) image.getX();
         this.y = (float) image.getY();
@@ -135,7 +134,7 @@ public class ModeleImg {
         mementoStack.push(m);
     }
 
-    public float getScaleFactor() {
+    public float getZoomFactor() {
         return zoomFactor;
     }
 
