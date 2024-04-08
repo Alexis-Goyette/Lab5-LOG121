@@ -28,9 +28,11 @@ public class ControleurImg {
     private MenuItem miSauvegarderImage;
     private MenuItem miSauvergarderPerspective;
     private MenuItem miUndo;
+    private MenuItem miCP;
 
     private ModeleImg modeleImgMilieu;
     private ModeleImg modeleImgDroite;
+    private ModeleImg modelOriginal;
 
     private static ImageView imgView1;
 
@@ -58,11 +60,13 @@ public class ControleurImg {
 
     private ICommand saveAsCommandImg1;
     private ICommand saveAsCommandImg2;
-    private ICommand saveCommandImg1;
-    private ICommand saveCommandImg2;
+    // private ICommand saveCommandImg1;
+    // private ICommand saveCommandImg2;
 
     private ICommand undoCommandImg1;
     private ICommand undoCommandImg2;
+
+    private ImgMemento perspectiveSauvegardé;
 
     private ControleurImg(InterfaceUtilisateur interfaceUtilisateur) {
         this.interfaceUtilisateur = interfaceUtilisateur;
@@ -75,6 +79,8 @@ public class ControleurImg {
         miSauvegarderImage = interfaceUtilisateur.getMiSauvegarderImage();
         miSauvergarderPerspective = interfaceUtilisateur.getMiSauvergarderPerspective();
         miUndo = interfaceUtilisateur.getMiUndo();
+        miCP = interfaceUtilisateur.getMiCP();
+        perspectiveSauvegardé = new ImgMemento(1f, 1f, 1f);
 
         imgView1 = interfaceUtilisateur.getImgView1();
         imgView2 = interfaceUtilisateur.getImgView2();
@@ -82,6 +88,7 @@ public class ControleurImg {
 
         this.modeleImgMilieu = new ModeleImg(imgView1, interfaceUtilisateur);
         this.modeleImgDroite = new ModeleImg(imgView2, interfaceUtilisateur);
+        this.modelOriginal = new ModeleImg(imgViewOriginal, interfaceUtilisateur);
 
         translateCommandLeftModImg1 = new TranslateCommand(modeleImgMilieu, TranslationDirection.LEFT);
         translateCommandRightModImg1 = new TranslateCommand(modeleImgMilieu, TranslationDirection.RIGHT);
@@ -92,7 +99,7 @@ public class ControleurImg {
         zoomCommandOutModImg1 = new ZoomCommand(modeleImgMilieu, ZoomDirection.OUT);
 
         saveAsCommandImg1 = new SaveAsCommand(modeleImgMilieu);
-        saveCommandImg1 = new SaveCommand(modeleImgMilieu);
+        // saveCommandImg1 = new SaveCommand(modeleImgMilieu);
 
         undoCommandImg1 = new UndoCommand(modeleImgMilieu);
 
@@ -105,9 +112,10 @@ public class ControleurImg {
         zoomCommandOutModImg2 = new ZoomCommand(modeleImgDroite, ZoomDirection.OUT);
 
         saveAsCommandImg2 = new SaveAsCommand(modeleImgDroite);
-        saveCommandImg1 = new SaveCommand(modeleImgDroite);
+        // saveCommandImg1 = new SaveCommand(modeleImgDroite);
 
         undoCommandImg2 = new UndoCommand(modeleImgDroite);
+
     }
 
     public static ControleurImg getInstance(InterfaceUtilisateur interfaceUtilisateur) {
@@ -239,20 +247,32 @@ public class ControleurImg {
         });
     }
 
-    public void SaveImage() {
+    public void Save() {
         miSauvergarderPerspective.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-                try {
-                    saveCommandImg1.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+
+                perspectiveSauvegardé = new ImgMemento(modeleImgMilieu.getXTranslationValue(),
+                        modeleImgMilieu.getYTranslationValue(), modeleImgMilieu.getZoomFactor());
+
             else
-                try {
-                    saveCommandImg2.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                perspectiveSauvegardé = new ImgMemento(modeleImgDroite.getXTranslationValue(),
+                        modeleImgDroite.getYTranslationValue(), modeleImgDroite.getZoomFactor());
+
+        });
+    }
+
+    public void Chargerperspective() {
+        miCP.setOnAction(e -> {
+            modeleImgMilieu.setXTranslationValue(perspectiveSauvegardé.getX());
+            modeleImgMilieu.setYTranslationValue(perspectiveSauvegardé.getY());
+            modeleImgMilieu.setZoomFactor(perspectiveSauvegardé.getZoom());
+
+            modeleImgDroite.setXTranslationValue(perspectiveSauvegardé.getX());
+            modeleImgDroite.setYTranslationValue(perspectiveSauvegardé.getY());
+            modeleImgDroite.setZoomFactor(perspectiveSauvegardé.getZoom());
+
+            modeleImgMilieu.notifyObservers();
+            modeleImgDroite.notifyObservers();
         });
     }
 

@@ -20,7 +20,7 @@
             <items>
                 <MenuItem fx:id="miSauvergarderPerspective" text="Sauvegarder perspective" />
                 <MenuItem fx:id="miSauvegarderImage" text="Sauvegarder Image"/>
-                <MenuItem fx:id="mi" text="Charger perspective" />
+                <MenuItem fx:id="miCP" text="Charger perspective" />
                 <MenuItem fx:id="miCI" text="Charger image" />
                 <MenuItem text="Quitter" />
             </items>

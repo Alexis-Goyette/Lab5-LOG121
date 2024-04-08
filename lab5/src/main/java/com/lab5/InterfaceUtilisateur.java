@@ -26,6 +26,8 @@ public class InterfaceUtilisateur implements IObserver {
     @FXML
     private MenuItem miSauvergarderPerspective;
     @FXML
+    private MenuItem miCP;
+    @FXML
     private MenuItem miUndo;
     @FXML
     private ImageView imgViewOriginal;
@@ -89,6 +91,8 @@ public class InterfaceUtilisateur implements IObserver {
                 controleur.selectionementImgV1();
                 controleur.selectionementImgV2();
                 controleur.SaveAs();
+                controleur.Save();
+                controleur.Chargerperspective();
                 controleur.Undo();
             }
         });
@@ -123,6 +127,10 @@ public class InterfaceUtilisateur implements IObserver {
 
     public MenuItem getMiSauvegarderImage() {
         return miSauvegarderImage;
+    }
+
+    public MenuItem getMiCP() {
+        return miCP;
     }
 
     public MenuItem getMiUndo() {

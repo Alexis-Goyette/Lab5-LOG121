@@ -102,7 +102,7 @@ public class ModeleImg {
     }
 
     public void save() {
-
+        notifyObservers();
     }
 
     public void saveAs() throws MalformedURLException, IOException {
@@ -121,7 +121,6 @@ public class ModeleImg {
                     "png",
                     file);
         }
-
     }
 
     public void Undo() {
@@ -150,5 +149,17 @@ public class ModeleImg {
 
     public float getYTranslationValue() {
         return y;
+    }
+
+    public void setZoomFactor(Float factor) {
+        zoomFactor = factor;
+    }
+
+    public void setXTranslationValue(Float x) {
+        this.x = x;
+    }
+
+    public void setYTranslationValue(Float y) {
+        this.y = y;
     }
 }
