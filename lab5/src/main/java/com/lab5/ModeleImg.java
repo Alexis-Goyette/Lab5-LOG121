@@ -5,15 +5,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class ModeleImg {
-
     private IObserver interfaceUtilisateur;
-    
-    private Image image;
+
 
     private ImageView imgView;
     private ArrayList<InterfaceUtilisateur> observateurs;
     private final int translationValue =10;
     private final float zoomTranlationValue = 0.1f;
+
     private Stack<ImgMemento> mementoStack;
 
     private float x,y, zoomFactor;
@@ -31,9 +30,6 @@ public class ModeleImg {
         return imgView;
     }
 
-    public void setImage(Image i) {
-        image = i;
-    }
 
     public void addObserver(InterfaceUtilisateur observer) {
         observateurs.add(observer);
@@ -52,9 +48,9 @@ public class ModeleImg {
         }
    }
     public void translateLeft() {
-       // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
+        // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
         // this.imgView.setTranslateX(this.imgView.getTranslateX() - translationValue);
-        this.x-=translationValue;
+        this.x -= translationValue;
         notifyObservers();
     }
 
@@ -92,9 +88,9 @@ public class ModeleImg {
     public void saveAs() {
     }
 
-    public ImgMemento créerMemento() {
-        return new ImgMemento(image);
-    }
+//    public ImgMemento créerMemento() {
+//        return new ImgMemento(imgView);
+//    }
 
     public void setMemento(ImgMemento m) {
         mementoStack.push(m);

@@ -32,25 +32,24 @@ public class InterfaceUtilisateur implements IObserver {
     @FXML
     private Button btnZoomOut;
     @FXML
-    private Button  btnBas;
+    private Button btnBas;
     @FXML
-    private Button  btnHaut;
+    private Button btnHaut;
 
     @FXML
-    private Button  btnGauche;
+    private Button btnGauche;
 
     @FXML
-    private Button  btnDroite;
-
+    private Button btnDroite;
 
     private Image image;
 
-
-
     private ControleurImg controleur;
+
     public InterfaceUtilisateur() {
 
     }
+
     @FXML
     public void initialize() {
         miCI.setOnAction(event -> {
@@ -58,7 +57,8 @@ public class InterfaceUtilisateur implements IObserver {
             fileChooser.setTitle("Open Resource File");
 
             // Set extension filter
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.png, *.jpeg)", "*.png", "*.jpeg");
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.png, *.jpeg)",
+                    "*.png", "*.jpeg");
             fileChooser.getExtensionFilters().add(extFilter);
 
             File file = fileChooser.showOpenDialog(miCI.getParentPopup().getScene().getWindow());
@@ -86,15 +86,12 @@ public class InterfaceUtilisateur implements IObserver {
         });
     }
 
-
-
     public void update(ModeleImg modele) {
         modele.getImageView().setTranslateX(modele.getXTranslationValue());
         modele.getImageView().setTranslateY(modele.getYTranslationValue());
         modele.getImageView().setScaleX(modele.getScaleFactor());
         modele.getImageView().setScaleY(modele.getScaleFactor());
     }
-
 
     public MenuButton getMbFichier() {
         return mbFichier;

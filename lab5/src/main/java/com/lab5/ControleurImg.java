@@ -153,6 +153,7 @@ public class ControleurImg {
         });
     }
 
+
     @FXML
     public void zoomOut() {
         btnZoomOut.setOnAction(e -> {
