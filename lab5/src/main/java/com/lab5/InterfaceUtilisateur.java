@@ -7,7 +7,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -29,6 +28,8 @@ public class InterfaceUtilisateur implements IObserver {
     private MenuItem miCP;
     @FXML
     private MenuItem miUndo;
+    @FXML
+    private MenuItem miRedo;
     @FXML
     private ImageView imgViewOriginal;
     @FXML
@@ -94,6 +95,7 @@ public class InterfaceUtilisateur implements IObserver {
                 controleur.Save();
                 controleur.Chargerperspective();
                 controleur.Undo();
+                controleur.Redo();
             }
         });
     }
@@ -135,6 +137,9 @@ public class InterfaceUtilisateur implements IObserver {
 
     public MenuItem getMiUndo() {
         return miUndo;
+    }
+    public MenuItem getMiRedo(){
+        return miRedo;
     }
 
     public ImageView getImgViewOriginal() {

@@ -1,11 +1,9 @@
 package com.lab5;
 
-import java.awt.Image;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 
@@ -28,6 +26,7 @@ public class ControleurImg {
     private MenuItem miSauvegarderImage;
     private MenuItem miSauvergarderPerspective;
     private MenuItem miUndo;
+    private MenuItem miRedo;
     private MenuItem miCP;
 
     private ModeleImg modeleImgMilieu;
@@ -65,6 +64,8 @@ public class ControleurImg {
 
     private ICommand undoCommandImg1;
     private ICommand undoCommandImg2;
+    private ICommand redoCommandImg1;
+    private ICommand redoCommandImg2;
 
     private ImgMemento perspectiveSauvegardé;
 
@@ -79,6 +80,7 @@ public class ControleurImg {
         miSauvegarderImage = interfaceUtilisateur.getMiSauvegarderImage();
         miSauvergarderPerspective = interfaceUtilisateur.getMiSauvergarderPerspective();
         miUndo = interfaceUtilisateur.getMiUndo();
+        miRedo = interfaceUtilisateur.getMiRedo();
         miCP = interfaceUtilisateur.getMiCP();
         perspectiveSauvegardé = new ImgMemento(1f, 1f, 1f);
 
@@ -102,6 +104,7 @@ public class ControleurImg {
         // saveCommandImg1 = new SaveCommand(modeleImgMilieu);
 
         undoCommandImg1 = new UndoCommand(modeleImgMilieu);
+        redoCommandImg1 = new RedoCommand(modeleImgMilieu);
 
         translateCommandLeftModImg2 = new TranslateCommand(modeleImgDroite, TranslationDirection.LEFT);
         translateCommandRightModImg2 = new TranslateCommand(modeleImgDroite, TranslationDirection.RIGHT);
@@ -115,7 +118,7 @@ public class ControleurImg {
         // saveCommandImg1 = new SaveCommand(modeleImgDroite);
 
         undoCommandImg2 = new UndoCommand(modeleImgDroite);
-
+        redoCommandImg1 = new RedoCommand(modeleImgDroite);
     }
 
     public static ControleurImg getInstance(InterfaceUtilisateur interfaceUtilisateur) {
@@ -304,6 +307,23 @@ public class ControleurImg {
             else
                 try {
                     undoCommandImg2.execute();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+        });
+    }
+
+    public void Redo() {
+        miRedo.setOnAction(e -> {
+            if (modeleImgSelectionne == modeleImgMilieu)
+                try {
+                    redoCommandImg1.execute();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            else
+                try {
+                    redoCommandImg2.execute();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }

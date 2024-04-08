@@ -1,21 +1,11 @@
 package com.lab5;
 
-import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import javax.imageio.ImageIO;
-
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
-import javafx.stage.DirectoryChooser;
 
 public class ModeleImg {
     private IObserver interfaceUtilisateur;
@@ -26,6 +16,7 @@ public class ModeleImg {
     private final float zoomTranlationValue = 0.1f;
 
     private Stack<ImgMemento> mementoStack;
+    private Stack<ImgMemento> UndoStack;
 
     private float x, y, zoomFactor;
 
@@ -34,6 +25,7 @@ public class ModeleImg {
         observateurs = new ArrayList<InterfaceUtilisateur>();
         zoomFactor = 1;
         mementoStack = new Stack<ImgMemento>();
+        UndoStack = new Stack<ImgMemento>();
         this.interfaceUtilisateur = interfaceUtilisateur;
         addObserver(interfaceUtilisateur);
     }
@@ -60,29 +52,24 @@ public class ModeleImg {
     }
 
     public void translateLeft() {
-        // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
-        // this.imgView.setTranslateX(this.imgView.getTranslateX() - translationValue);
         mementoStack.push(créerMemento());
         this.x -= translationValue;
         notifyObservers();
     }
 
     public void translateRight() {
-        // this.imgView.setTranslateX(this.imgView.getTranslateX() + translationValue);
         mementoStack.push(créerMemento());
         this.x += translationValue;
         notifyObservers();
     }
 
     public void translateUp() {
-        // this.imgView.setTranslateY(this.imgView.getTranslateY() - translationValue);
         mementoStack.push(créerMemento());
         this.y -= translationValue;
         notifyObservers();
     }
 
     public void translateDown() {
-        // this.imgView.setTranslateY(this.imgView.getTranslateY() + translationValue);
         mementoStack.push(créerMemento());
         this.y += translationValue;
         notifyObservers();
@@ -95,7 +82,6 @@ public class ModeleImg {
     }
 
     public void zoomOut() {
-        // setMemento(créerMemento());
         mementoStack.push(créerMemento());
         this.zoomFactor -= zoomTranlationValue;
         notifyObservers();
@@ -106,7 +92,7 @@ public class ModeleImg {
     }
 
     public void saveAs() throws MalformedURLException, IOException {
-        DirectoryChooser fileChooser = new DirectoryChooser();
+      /*  DirectoryChooser fileChooser = new DirectoryChooser();
 
         fileChooser.setTitle("Open Resource Folder");
 
@@ -120,11 +106,20 @@ public class ModeleImg {
                     renderedImage,
                     "png",
                     file);
-        }
+        }*/
     }
 
     public void Undo() {
         var image = mementoStack.pop();
+        UndoStack.push(créerMemento());
+        this.x = (float) image.getX();
+        this.y = (float) image.getY();
+        this.zoomFactor = (float) image.getZoom();
+        notifyObservers();
+    }
+
+    public void Redo() {
+        var image = UndoStack.pop();
         this.x = (float) image.getX();
         this.y = (float) image.getY();
         this.zoomFactor = (float) image.getZoom();

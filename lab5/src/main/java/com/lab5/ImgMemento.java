@@ -1,7 +1,5 @@
 package com.lab5;
 
-import javafx.scene.image.ImageView;
-
 public class ImgMemento {
 
     private float x, y, zoomFactor;
