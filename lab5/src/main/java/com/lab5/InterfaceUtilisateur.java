@@ -22,6 +22,8 @@ public class InterfaceUtilisateur implements IObserver {
     @FXML
     private MenuItem miCI;
     @FXML
+    private MenuItem miSauvegarderImage;
+    @FXML
     private ImageView imgViewOriginal;
     @FXML
     private ImageView imgView1;
@@ -73,7 +75,7 @@ public class InterfaceUtilisateur implements IObserver {
                 imgView2.setImage(image);
                 imgView2.setFitWidth(535); // Set the width
                 imgView2.setFitHeight(500);
-                controleur= ControleurImg.getInstance(this);
+                controleur = ControleurImg.getInstance(this);
                 controleur.translateDown();
                 controleur.translateUp();
                 controleur.translateLeft();
@@ -82,6 +84,7 @@ public class InterfaceUtilisateur implements IObserver {
                 controleur.zoomOut();
                 controleur.selectionementImgV1();
                 controleur.selectionementImgV2();
+                controleur.SaveAs();
             }
         });
     }
@@ -107,6 +110,10 @@ public class InterfaceUtilisateur implements IObserver {
 
     public MenuItem getMiCI() {
         return miCI;
+    }
+
+    public MenuItem getMiSauvegarderImage() {
+        return miSauvegarderImage;
     }
 
     public ImageView getImgViewOriginal() {
