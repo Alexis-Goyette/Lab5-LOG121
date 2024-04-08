@@ -256,12 +256,10 @@ public class ControleurImg {
         miSauvergarderPerspective.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
 
-                perspectiveSauvegardé = new ImgMemento(modeleImgMilieu.getXTranslationValue(),
-                        modeleImgMilieu.getYTranslationValue(), modeleImgMilieu.getZoomFactor());
+                perspectiveSauvegardé = modeleImgMilieu.créerMemento();
 
             else
-                perspectiveSauvegardé = new ImgMemento(modeleImgDroite.getXTranslationValue(),
-                        modeleImgDroite.getYTranslationValue(), modeleImgDroite.getZoomFactor());
+                perspectiveSauvegardé = modeleImgDroite.créerMemento();
 
         });
     }
