@@ -92,21 +92,23 @@ public class ModeleImg {
     }
 
     public void saveAs() throws MalformedURLException, IOException {
-      /*  DirectoryChooser fileChooser = new DirectoryChooser();
-
-        fileChooser.setTitle("Open Resource Folder");
-
-        File selectedFile = fileChooser.showDialog(null);
-        if (selectedFile != null) {
-
-            var wi = imgView.snapshot(null, null);
-            File file = new File(selectedFile.getAbsolutePath() + "/image.png");
-            RenderedImage renderedImage = SwingFXUtils.fromFXImage(wi, null);
-            ImageIO.write(
-                    renderedImage,
-                    "png",
-                    file);
-        }*/
+        /*
+         * DirectoryChooser fileChooser = new DirectoryChooser();
+         * 
+         * fileChooser.setTitle("Open Resource Folder");
+         * 
+         * File selectedFile = fileChooser.showDialog(null);
+         * if (selectedFile != null) {
+         * 
+         * var wi = imgView.snapshot(null, null);
+         * File file = new File(selectedFile.getAbsolutePath() + "/image.png");
+         * RenderedImage renderedImage = SwingFXUtils.fromFXImage(wi, null);
+         * ImageIO.write(
+         * renderedImage,
+         * "png",
+         * file);
+         * }
+         */
     }
 
     public void Undo() {
@@ -126,7 +128,7 @@ public class ModeleImg {
         notifyObservers();
     }
 
-    public void chargerPerspective(ImgMemento memento){
+    public void chargerPerspective(ImgMemento memento) {
         this.x = (float) memento.getX();
         this.y = (float) memento.getY();
         this.zoomFactor = (float) memento.getZoom();
