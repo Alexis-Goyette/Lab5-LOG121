@@ -27,8 +27,8 @@
         </MenuButton>
         <MenuButton fx:id="mbEdition" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-arrow: transparent;" text="Edition" GridPane.columnIndex="1">
             <items>
-                <MenuItem text="Défaire" />
-                <MenuItem text="Refaire" />
+                <MenuItem fx:id="miUndo" text="Défaire" />
+                <MenuItem fx:id="miRedo" text="Refaire" />
             </items>
          <GridPane.margin>
             <Insets left="75.0" />

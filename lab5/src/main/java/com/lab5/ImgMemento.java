@@ -1,22 +1,33 @@
 package com.lab5;
 
-
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ImgMemento {
 
-    private Image etat;
+    private float x, y, zoomFactor;
 
-    public ImgMemento(Image i) {
-        etat = i;
+    public ImgMemento(float x, Float y, Float zoomFactor) {
+        this.x = x;
+        this.y = y;
+        this.zoomFactor = zoomFactor;
     }
 
-    public void SetEtat(Image i) {
-        etat = i;
+    public void SetEtat(float x, Float y, Float zoomFactor) {
+        this.x = x;
+        this.y = y;
+        this.zoomFactor = zoomFactor;
     }
 
-    public Image GetEtat() {
-        return etat;
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getZoom() {
+        return zoomFactor;
     }
 
 }

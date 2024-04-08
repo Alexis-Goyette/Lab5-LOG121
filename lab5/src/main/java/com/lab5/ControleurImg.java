@@ -24,8 +24,8 @@ public class ControleurImg {
     private Button btnBas;
     private Button btnZoomIn;
     private Button btnZoomOut;
-    private MenuButton mbFichier;
     private MenuItem miSauvegarderImage;
+    private MenuItem miUndo;
 
     private ModeleImg modeleImgMilieu;
     private ModeleImg modeleImgDroite;
@@ -55,6 +55,9 @@ public class ControleurImg {
     private ICommand saveAsCommandImg1;
     private ICommand saveAsCommandImg2;
 
+    private ICommand undoCommandImg1;
+    private ICommand undoCommandImg2;
+
     private ControleurImg(InterfaceUtilisateur interfaceUtilisateur) {
         this.interfaceUtilisateur = interfaceUtilisateur;
         btnGauche = interfaceUtilisateur.getBtnGauche();
@@ -63,8 +66,8 @@ public class ControleurImg {
         btnBas = interfaceUtilisateur.getBtnBas();
         btnZoomIn = interfaceUtilisateur.getBtnZoomIn();
         btnZoomOut = interfaceUtilisateur.getBtnZoomOut();
-        mbFichier = interfaceUtilisateur.getMbFichier();
         miSauvegarderImage = interfaceUtilisateur.getMiSauvegarderImage();
+        miUndo = interfaceUtilisateur.getMiUndo();
 
         imgView1 = interfaceUtilisateur.getImgView1();
         imgView2 = interfaceUtilisateur.getImgView2();
@@ -82,6 +85,8 @@ public class ControleurImg {
 
         saveAsCommandImg1 = new SaveAsCommand(modeleImgMilieu);
 
+        undoCommandImg1 = new UndoCommand(modeleImgMilieu);
+
         translateCommandLeftModImg2 = new TranslateCommand(modeleImgDroite, TranslationDirection.LEFT);
         translateCommandRightModImg2 = new TranslateCommand(modeleImgDroite, TranslationDirection.RIGHT);
         translateCommandUpModImg2 = new TranslateCommand(modeleImgDroite, TranslationDirection.UP);
@@ -91,6 +96,8 @@ public class ControleurImg {
         zoomCommandOutModImg2 = new ZoomCommand(modeleImgDroite, ZoomDirection.OUT);
 
         saveAsCommandImg2 = new SaveAsCommand(modeleImgDroite);
+
+        undoCommandImg2 = new UndoCommand(modeleImgDroite);
     }
 
     public static ControleurImg getInstance(InterfaceUtilisateur interfaceUtilisateur) {
@@ -121,14 +128,12 @@ public class ControleurImg {
                 try {
                     translateCommandLeftModImg1.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             else
                 try {
                     translateCommandLeftModImg2.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
         });
@@ -141,14 +146,12 @@ public class ControleurImg {
                 try {
                     translateCommandRightModImg1.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             else
                 try {
                     translateCommandRightModImg2.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
         });
@@ -161,14 +164,12 @@ public class ControleurImg {
                 try {
                     translateCommandDownModImg1.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             else
                 try {
                     translateCommandDownModImg2.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
         });
@@ -181,14 +182,12 @@ public class ControleurImg {
                 try {
                     translateCommandUpModImg1.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             else
                 try {
                     translateCommandUpModImg2.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
         });
@@ -201,14 +200,12 @@ public class ControleurImg {
                 try {
                     zoomCommandInModImg1.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             else
                 try {
                     zoomCommandInModImg2.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
         });
@@ -221,14 +218,12 @@ public class ControleurImg {
                 try {
                     zoomCommandOutModImg1.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             else
                 try {
                     zoomCommandOutModImg2.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
         });
@@ -243,20 +238,32 @@ public class ControleurImg {
                 try {
                     saveAsCommandImg1.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             else
                 try {
                     saveAsCommandImg2.execute();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
         });
     }
 
     public void Undo() {
+        miUndo.setOnAction(e -> {
+            if (modeleImgSelectionne == modeleImgMilieu)
+                try {
+                    undoCommandImg1.execute();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            else
+                try {
+                    undoCommandImg2.execute();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+        });
     }
 
     public void CopyParams(ModeleImg source, ICopyStrategy strategy) {

@@ -33,7 +33,6 @@ public class ModeleImg {
         observateurs = new ArrayList<InterfaceUtilisateur>();
         zoomFactor = 1;
         mementoStack = new Stack<ImgMemento>();
-        // mementoStack.add(new ImgMemento(imageView.getImage()));
         this.interfaceUtilisateur = interfaceUtilisateur;
         addObserver(interfaceUtilisateur);
     }
@@ -62,34 +61,40 @@ public class ModeleImg {
     public void translateLeft() {
         // this.image.setTranslateX(this.image.getTranslateX() - translationValue);
         // this.imgView.setTranslateX(this.imgView.getTranslateX() - translationValue);
+        mementoStack.push(créerMemento());
         this.x -= translationValue;
         notifyObservers();
     }
 
     public void translateRight() {
         // this.imgView.setTranslateX(this.imgView.getTranslateX() + translationValue);
+        mementoStack.push(créerMemento());
         this.x += translationValue;
         notifyObservers();
     }
 
     public void translateUp() {
         // this.imgView.setTranslateY(this.imgView.getTranslateY() - translationValue);
+        mementoStack.push(créerMemento());
         this.y -= translationValue;
         notifyObservers();
     }
 
     public void translateDown() {
         // this.imgView.setTranslateY(this.imgView.getTranslateY() + translationValue);
+        mementoStack.push(créerMemento());
         this.y += translationValue;
         notifyObservers();
     }
 
     public void zoomIn() {
+        mementoStack.push(créerMemento());
         this.zoomFactor += zoomTranlationValue;
         notifyObservers();
     }
 
     public void zoomOut() {
+        mementoStack.push(créerMemento());
         this.zoomFactor -= zoomTranlationValue;
         notifyObservers();
     }
@@ -113,9 +118,18 @@ public class ModeleImg {
 
     }
 
-    // public ImgMemento créerMemento() {
-    // return new ImgMemento(imgView);
-    // }
+    public void Undo() {
+        System.out.println("yo");
+        var image = mementoStack.pop();
+        this.x = (float) image.getX();
+        this.y = (float) image.getY();
+        this.zoomFactor = (float) image.getZoom();
+        notifyObservers();
+    }
+
+    public ImgMemento créerMemento() {
+        return new ImgMemento(x, y, zoomFactor);
+    }
 
     public void setMemento(ImgMemento m) {
         mementoStack.push(m);
