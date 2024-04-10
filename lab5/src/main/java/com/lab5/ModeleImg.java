@@ -91,26 +91,6 @@ public class ModeleImg {
         notifyObservers();
     }
 
-    public void saveAs() throws MalformedURLException, IOException {
-        /*
-         * DirectoryChooser fileChooser = new DirectoryChooser();
-         * 
-         * fileChooser.setTitle("Open Resource Folder");
-         * 
-         * File selectedFile = fileChooser.showDialog(null);
-         * if (selectedFile != null) {
-         * 
-         * var wi = imgView.snapshot(null, null);
-         * File file = new File(selectedFile.getAbsolutePath() + "/image.png");
-         * RenderedImage renderedImage = SwingFXUtils.fromFXImage(wi, null);
-         * ImageIO.write(
-         * renderedImage,
-         * "png",
-         * file);
-         * }
-         */
-    }
-
     public void Undo() {
         var image = mementoStack.pop();
         UndoStack.push(créerMemento());
@@ -128,10 +108,15 @@ public class ModeleImg {
         notifyObservers();
     }
 
-    public void chargerPerspective(ImgMemento memento) {
-        this.x = (float) memento.getX();
-        this.y = (float) memento.getY();
-        this.zoomFactor = (float) memento.getZoom();
+    public void chargerPerspective(ImgMemento memento, String elementsACopier) {
+        if (elementsACopier.contains("Grandissement")) {
+            this.zoomFactor = (float) memento.getZoom();
+        }
+        if (elementsACopier.contains("Translation")) {
+            this.x = (float) memento.getX();
+            this.y = (float) memento.getY();
+        }
+
         notifyObservers();
     }
 

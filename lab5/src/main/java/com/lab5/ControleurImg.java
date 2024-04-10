@@ -4,8 +4,11 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class ControleurImg {
     public ControleurImg() {
@@ -58,17 +61,16 @@ public class ControleurImg {
     private ICommand zoomCommandInModImg2;
     private ICommand zoomCommandOutModImg2;
 
-    private ICommand saveAsCommandImg1;
-    private ICommand saveAsCommandImg2;
-    // private ICommand saveCommandImg1;
-    // private ICommand saveCommandImg2;
-
     private ICommand undoCommandImg1;
     private ICommand undoCommandImg2;
     private ICommand redoCommandImg1;
     private ICommand redoCommandImg2;
 
     private ImgMemento perspectiveSauvegardé;
+
+    private String[] elementACopierChoix = { "Translation seulement", "Grandissement seulement",
+            "Translation et Grandissement" };
+    private String elementsACopier;
 
     private ControleurImg(InterfaceUtilisateur interfaceUtilisateur) {
         this.interfaceUtilisateur = interfaceUtilisateur;
@@ -86,6 +88,8 @@ public class ControleurImg {
         miChoisirStrat = interfaceUtilisateur.getMiChoisirStrat();
         perspectiveSauvegardé = new ImgMemento(1f, 1f, 1f);
 
+        elementsACopier = "";
+
         imgView1 = interfaceUtilisateur.getImgView1();
         imgView2 = interfaceUtilisateur.getImgView2();
         imgViewOriginal = interfaceUtilisateur.getImgViewOriginal();
@@ -102,9 +106,6 @@ public class ControleurImg {
         zoomCommandInModImg1 = new ZoomCommand(modeleImgMilieu, ZoomDirection.IN);
         zoomCommandOutModImg1 = new ZoomCommand(modeleImgMilieu, ZoomDirection.OUT);
 
-        saveAsCommandImg1 = new SaveAsCommand(modeleImgMilieu);
-        // saveCommandImg1 = new SaveCommand(modeleImgMilieu);
-
         undoCommandImg1 = new UndoCommand(modeleImgMilieu);
         redoCommandImg1 = new RedoCommand(modeleImgMilieu);
 
@@ -115,9 +116,6 @@ public class ControleurImg {
 
         zoomCommandInModImg2 = new ZoomCommand(modeleImgDroite, ZoomDirection.IN);
         zoomCommandOutModImg2 = new ZoomCommand(modeleImgDroite, ZoomDirection.OUT);
-
-        saveAsCommandImg2 = new SaveAsCommand(modeleImgDroite);
-        // saveCommandImg1 = new SaveCommand(modeleImgDroite);
 
         undoCommandImg2 = new UndoCommand(modeleImgDroite);
         redoCommandImg1 = new RedoCommand(modeleImgDroite);
@@ -148,17 +146,9 @@ public class ControleurImg {
     public void translateLeft() {
         btnGauche.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-                try {
-                    translateCommandLeftModImg1.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                translateCommandLeftModImg1.execute();
             else
-                try {
-                    translateCommandLeftModImg2.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                translateCommandLeftModImg2.execute();
         });
     }
 
@@ -166,17 +156,9 @@ public class ControleurImg {
     public void translateRight() {
         btnDroite.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-                try {
-                    translateCommandRightModImg1.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                translateCommandRightModImg1.execute();
             else
-                try {
-                    translateCommandRightModImg2.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                translateCommandRightModImg2.execute();
         });
     }
 
@@ -184,17 +166,9 @@ public class ControleurImg {
     public void translateDown() {
         btnBas.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-                try {
-                    translateCommandDownModImg1.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                translateCommandDownModImg1.execute();
             else
-                try {
-                    translateCommandDownModImg2.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                translateCommandDownModImg2.execute();
         });
     }
 
@@ -202,17 +176,9 @@ public class ControleurImg {
     public void translateUp() {
         btnHaut.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-                try {
-                    translateCommandUpModImg1.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                translateCommandUpModImg1.execute();
             else
-                try {
-                    translateCommandUpModImg2.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                translateCommandUpModImg2.execute();
         });
     }
 
@@ -220,17 +186,9 @@ public class ControleurImg {
     public void zoomIn() {
         btnZoomIn.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-                try {
-                    zoomCommandInModImg1.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                zoomCommandInModImg1.execute();
             else
-                try {
-                    zoomCommandInModImg2.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                zoomCommandInModImg2.execute();
         });
     }
 
@@ -238,24 +196,15 @@ public class ControleurImg {
     public void zoomOut() {
         btnZoomOut.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-                try {
-                    zoomCommandOutModImg1.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                zoomCommandOutModImg1.execute();
             else
-                try {
-                    zoomCommandOutModImg2.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                zoomCommandOutModImg2.execute();
         });
     }
 
     public void Save() {
         miSauvergarderPerspective.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-
                 perspectiveSauvegardé = modeleImgMilieu.créerMemento();
 
             else
@@ -266,60 +215,38 @@ public class ControleurImg {
 
     public void Chargerperspective() {
         miCP.setOnAction(e -> {
-            modeleImgMilieu.chargerPerspective(perspectiveSauvegardé);
+            modeleImgMilieu.chargerPerspective(perspectiveSauvegardé, elementsACopier);
 
-            modeleImgDroite.chargerPerspective(perspectiveSauvegardé);
-        });
-    }
-
-    public void SaveAs() {
-        miSauvegarderImage.setOnAction(e -> {
-            if (modeleImgSelectionne == modeleImgMilieu)
-                try {
-                    saveAsCommandImg1.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            else
-                try {
-                    saveAsCommandImg2.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+            modeleImgDroite.chargerPerspective(perspectiveSauvegardé, elementsACopier);
         });
     }
 
     public void Undo() {
         miUndo.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-                try {
-                    undoCommandImg1.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                undoCommandImg1.execute();
             else
-                try {
-                    undoCommandImg2.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                undoCommandImg2.execute();
         });
     }
 
     public void Redo() {
         miRedo.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-                try {
-                    redoCommandImg1.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                redoCommandImg1.execute();
             else
-                try {
-                    redoCommandImg2.execute();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                redoCommandImg2.execute();
+        });
+    }
+
+    public void ChoixStrat() {
+        miChoisirStrat.setOnAction(e -> {
+            ChoiceDialog choixDialog = new ChoiceDialog<>(elementACopierChoix[0], elementACopierChoix);
+            choixDialog.setTitle("Élements à copier");
+            choixDialog.show();
+            choixDialog.setOnCloseRequest(ev -> {
+                elementsACopier = choixDialog.getResult().toString();
+            });
         });
     }
 
