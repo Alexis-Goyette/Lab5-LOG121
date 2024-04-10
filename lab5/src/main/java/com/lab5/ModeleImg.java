@@ -1,14 +1,11 @@
 package com.lab5;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Stack;
 
 import javafx.scene.image.ImageView;
 
 public class ModeleImg {
-    private IObserver interfaceUtilisateur;
 
     private ImageView imgView;
     private ArrayList<InterfaceUtilisateur> observateurs;
@@ -26,7 +23,6 @@ public class ModeleImg {
         zoomFactor = 1;
         mementoStack = new Stack<ImgMemento>();
         UndoStack = new Stack<ImgMemento>();
-        this.interfaceUtilisateur = interfaceUtilisateur;
         addObserver(interfaceUtilisateur);
     }
 

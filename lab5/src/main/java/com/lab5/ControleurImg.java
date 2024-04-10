@@ -17,16 +17,12 @@ public class ControleurImg {
 
     private static ControleurImg instanceUnique;
 
-    private int indexCommand;
-    private CopyPasteMediator mediator;
-    private static InterfaceUtilisateur interfaceUtilisateur;
     private Button btnGauche;
     private Button btnDroite;
     private Button btnHaut;
     private Button btnBas;
     private Button btnZoomIn;
     private Button btnZoomOut;
-    private MenuItem miSauvegarderImage;
     private MenuItem miSauvergarderPerspective;
     private MenuItem miUndo;
     private MenuItem miRedo;
@@ -35,13 +31,10 @@ public class ControleurImg {
 
     private ModeleImg modeleImgMilieu;
     private ModeleImg modeleImgDroite;
-    private ModeleImg modelOriginal;
 
     private static ImageView imgView1;
 
     private static ImageView imgView2;
-
-    private static ImageView imgViewOriginal;
 
     private ModeleImg modeleImgSelectionne;
 
@@ -70,17 +63,16 @@ public class ControleurImg {
 
     private String[] elementACopierChoix = { "Translation seulement", "Grandissement seulement",
             "Translation et Grandissement" };
-    private String elementsACopier;
+    private String elementsACopier = "Translation et Grandissement";
 
     private ControleurImg(InterfaceUtilisateur interfaceUtilisateur) {
-        this.interfaceUtilisateur = interfaceUtilisateur;
+        // Aller chercher les rfrances aux diffrents boutons et modèles des images
         btnGauche = interfaceUtilisateur.getBtnGauche();
         btnDroite = interfaceUtilisateur.getBtnDroite();
         btnHaut = interfaceUtilisateur.getBtnHaut();
         btnBas = interfaceUtilisateur.getBtnBas();
         btnZoomIn = interfaceUtilisateur.getBtnZoomIn();
         btnZoomOut = interfaceUtilisateur.getBtnZoomOut();
-        miSauvegarderImage = interfaceUtilisateur.getMiSauvegarderImage();
         miSauvergarderPerspective = interfaceUtilisateur.getMiSauvergarderPerspective();
         miUndo = interfaceUtilisateur.getMiUndo();
         miRedo = interfaceUtilisateur.getMiRedo();
@@ -88,16 +80,13 @@ public class ControleurImg {
         miChoisirStrat = interfaceUtilisateur.getMiChoisirStrat();
         perspectiveSauvegardé = new ImgMemento(1f, 1f, 1f);
 
-        elementsACopier = "";
-
         imgView1 = interfaceUtilisateur.getImgView1();
         imgView2 = interfaceUtilisateur.getImgView2();
-        imgViewOriginal = interfaceUtilisateur.getImgViewOriginal();
 
         this.modeleImgMilieu = new ModeleImg(imgView1, interfaceUtilisateur);
         this.modeleImgDroite = new ModeleImg(imgView2, interfaceUtilisateur);
-        this.modelOriginal = new ModeleImg(imgViewOriginal, interfaceUtilisateur);
 
+        // instanciation des commandes
         translateCommandLeftModImg1 = new TranslateCommand(modeleImgMilieu, TranslationDirection.LEFT);
         translateCommandRightModImg1 = new TranslateCommand(modeleImgMilieu, TranslationDirection.RIGHT);
         translateCommandUpModImg1 = new TranslateCommand(modeleImgMilieu, TranslationDirection.UP);
@@ -118,7 +107,7 @@ public class ControleurImg {
         zoomCommandOutModImg2 = new ZoomCommand(modeleImgDroite, ZoomDirection.OUT);
 
         undoCommandImg2 = new UndoCommand(modeleImgDroite);
-        redoCommandImg1 = new RedoCommand(modeleImgDroite);
+        redoCommandImg2 = new RedoCommand(modeleImgDroite);
     }
 
     public static ControleurImg getInstance(InterfaceUtilisateur interfaceUtilisateur) {
@@ -249,14 +238,4 @@ public class ControleurImg {
             });
         });
     }
-
-    public void CopyParams(ModeleImg source, ICopyStrategy strategy) {
-    }
-
-    public void PasteParams(ModeleImg source, ModeleImg destination) {
-    }
-
-    // je suis pas sûr si le type de "source" et "destination" est bon,
-    // il était pas marqué dans l'uml, à changer au besoin
-
 }

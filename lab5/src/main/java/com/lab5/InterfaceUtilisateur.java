@@ -85,6 +85,7 @@ public class InterfaceUtilisateur implements IObserver {
                 imgView2.setFitWidth(535); // Set the width
                 imgView2.setFitHeight(500);
                 controleur = ControleurImg.getInstance(this);
+                // appelle les méthodes du controleur pour instancier les eventHandler
                 controleur.translateDown();
                 controleur.translateUp();
                 controleur.translateLeft();
@@ -109,6 +110,8 @@ public class InterfaceUtilisateur implements IObserver {
         modele.getImageView().setScaleY(modele.getZoomFactor());
     }
 
+
+    // tout les méthodes get pour que les autres classes aie accèes aux éléments de l'interface
     public MenuButton getMbFichier() {
         return mbFichier;
     }
@@ -140,7 +143,8 @@ public class InterfaceUtilisateur implements IObserver {
     public MenuItem getMiUndo() {
         return miUndo;
     }
-    public MenuItem getMiRedo(){
+
+    public MenuItem getMiRedo() {
         return miRedo;
     }
 
@@ -180,7 +184,7 @@ public class InterfaceUtilisateur implements IObserver {
         return btnDroite;
     }
 
-    public MenuItem getMiChoisirStrat(){
+    public MenuItem getMiChoisirStrat() {
         return miChoisirStrat;
     }
 }
