@@ -58,6 +58,8 @@ public class ControleurImg {
     private ICommand undoCommandImg2;
     private ICommand redoCommandImg1;
     private ICommand redoCommandImg2;
+    private ICommand saveAsCommandImg1;
+    private ICommand saveAsCommandImg2;
 
     private ImgMemento perspectiveSauvegardé;
 
@@ -108,6 +110,11 @@ public class ControleurImg {
 
         undoCommandImg2 = new UndoCommand(modeleImgDroite);
         redoCommandImg2 = new RedoCommand(modeleImgDroite);
+
+        saveAsCommandImg1 = new SaveAsCommand(modeleImgMilieu);
+        saveAsCommandImg2 = new SaveAsCommand(modeleImgDroite);
+
+
     }
 
     public static ControleurImg getInstance(InterfaceUtilisateur interfaceUtilisateur) {
@@ -191,14 +198,24 @@ public class ControleurImg {
         });
     }
 
-    public void Save() {
+//    public void Save() {
+//        miSauvergarderPerspective.setOnAction(e -> {
+//            if (modeleImgSelectionne == modeleImgMilieu)
+//                perspectiveSauvegardé = modeleImgMilieu.créerMemento();
+//
+//            else
+//                perspectiveSauvegardé = modeleImgDroite.créerMemento();
+//
+//        });
+//    }
+
+    @FXML
+    public void saveAs() {
         miSauvergarderPerspective.setOnAction(e -> {
             if (modeleImgSelectionne == modeleImgMilieu)
-                perspectiveSauvegardé = modeleImgMilieu.créerMemento();
-
+                saveAsCommandImg1.execute();
             else
-                perspectiveSauvegardé = modeleImgDroite.créerMemento();
-
+                saveAsCommandImg2.execute();
         });
     }
 

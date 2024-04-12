@@ -2,8 +2,17 @@ package com.lab5;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.Image;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.stage.FileChooser;
 
 public class ModeleImg {
 
@@ -69,6 +78,27 @@ public class ModeleImg {
         mementoStack.push(créerMemento());
         this.y += translationValue;
         notifyObservers();
+    }
+
+    public void sauvegarderPerspective() {
+        SnapshotParameters parameters = new SnapshotParameters();
+        WritableImage wi = new WritableImage((int) imgView.getFitWidth(), (int) imgView.getFitHeight());
+        WritableImage snapshot = imgView.snapshot(parameters, wi);
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG Files", "*.png")
+        );
+        File file = fileChooser.showSaveDialog(null); // You should pass the primary stage here instead of null.
+        if (file != null) {
+            try {
+                BufferedImage bImage = SwingFXUtils.fromFXImage(snapshot, null);
+                ImageIO.write(bImage, "png", file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void zoomIn() {

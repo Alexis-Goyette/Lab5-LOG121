@@ -10,11 +10,6 @@ public class ImgMemento {
         this.zoomFactor = zoomFactor;
     }
 
-    public void SetEtat(float x, Float y, Float zoomFactor) {
-        this.x = x;
-        this.y = y;
-        this.zoomFactor = zoomFactor;
-    }
 
     public float getX() {
         return x;
