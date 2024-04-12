@@ -2,6 +2,7 @@ package com.lab5;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -51,6 +52,14 @@ public class InterfaceUtilisateur implements IObserver {
     @FXML
     private Button btnDroite;
 
+    @FXML
+    private MenuItem mICopierImg1;
+    @FXML
+    private MenuItem mICopierImg2;
+    @FXML
+    private MenuItem mICollerImg1;
+    @FXML
+    private MenuItem mICollerImg2;
 
     private Image image;
 
@@ -93,12 +102,16 @@ public class InterfaceUtilisateur implements IObserver {
                 controleur.zoomOut();
                 controleur.selectionementImgV1();
                 controleur.selectionementImgV2();
-                //controleur.Save();
+                controleur.Save();
                 controleur.Chargerperspective();
                 controleur.Undo();
                 controleur.Redo();
                 controleur.ChoixStrat();
                 controleur.saveAs();
+                controleur.CopyMilieu();
+                controleur.CopyDroite();
+                controleur.PasteMilieu();
+                controleur.PasteDroite();
             }
         });
     }
@@ -117,11 +130,8 @@ public class InterfaceUtilisateur implements IObserver {
         miRedo.setDisable(modele.getUndoStack().isEmpty());
         miUndo.setDisable(modele.getMementoStack().isEmpty());
     }
-
-
-
-
-    // tout les méthodes get pour que les autres classes aie accèes aux éléments de l'interface
+    // tout les méthodes get pour que les autres classes aie accèes aux éléments de
+    // l'interface
     public MenuButton getMbFichier() {
         return mbFichier;
     }
@@ -192,5 +202,21 @@ public class InterfaceUtilisateur implements IObserver {
 
     public MenuItem getMiChoisirStrat() {
         return miChoisirStrat;
+    }
+
+    public MenuItem getMICopierImg1() {
+        return mICopierImg1;
+    }
+
+    public MenuItem getMICopierImg2() {
+        return mICopierImg2;
+    }
+
+    public MenuItem getMICollerImg1() {
+        return mICollerImg1;
+    }
+
+    public MenuItem getMICollerImg2() {
+        return mICollerImg2;
     }
 }
