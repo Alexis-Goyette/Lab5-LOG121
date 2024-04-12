@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.ContextMenu?>
 
 <?import javafx.scene.control.ScrollPane?>
 <GridPane alignment="TOP_LEFT" hgap="10" prefHeight="536.0" prefWidth="1243.0" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lab5.InterfaceUtilisateur">
@@ -48,13 +49,29 @@
         </ScrollPane>
         <ScrollPane GridPane.columnIndex="2" GridPane.rowIndex="2" hbarPolicy="NEVER" vbarPolicy="NEVER">
             <content>
-                <ImageView fx:id="imgView1" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="imgView1" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true"/> 
             </content>
+            <contextMenu>
+                <ContextMenu>
+                    <items>
+                        <MenuItem fx:id="mICopierImg1" text="Copier"/>
+                        <MenuItem fx:id="mICollerImg1" text="Coller"/>
+                    </items>
+                </ContextMenu>
+            </contextMenu>
         </ScrollPane>
         <ScrollPane GridPane.columnIndex="3" GridPane.rowIndex="2" hbarPolicy="NEVER" vbarPolicy="NEVER">
             <content>
                 <ImageView fx:id="imgView2" fitHeight="400.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" />
             </content>
+            <contextMenu>
+                <ContextMenu>
+                    <items>
+                        <MenuItem fx:id="mICopierImg2" text="Copier"/>
+                        <MenuItem fx:id="mICollerImg2" text="Coller"/>
+                    </items>
+                </ContextMenu>
+            </contextMenu>
         </ScrollPane>
         <ButtonBar buttonOrder="L_E+U+OCAHNRFX" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
             <buttons>
@@ -84,4 +101,6 @@
       <RowConstraints />
       <RowConstraints minHeight="10.0" prefHeight="70.0" />
    </rowConstraints>
+
+    
 </GridPane>

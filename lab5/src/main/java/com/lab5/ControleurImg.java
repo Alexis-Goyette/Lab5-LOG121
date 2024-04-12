@@ -5,8 +5,10 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -28,6 +30,11 @@ public class ControleurImg {
     private MenuItem miRedo;
     private MenuItem miCP;
     private MenuItem miChoisirStrat;
+
+    private MenuItem mICopierImg1;
+    private MenuItem mICopierImg2;
+    private MenuItem mICollerImg1;
+    private MenuItem mICollerImg2;
 
     private ModeleImg modeleImgMilieu;
     private ModeleImg modeleImgDroite;
@@ -79,6 +86,10 @@ public class ControleurImg {
         miCP = interfaceUtilisateur.getMiCP();
         miChoisirStrat = interfaceUtilisateur.getMiChoisirStrat();
         perspectiveSauvegardé = new ImgMemento(1f, 1f, 1f);
+        mICopierImg1 = interfaceUtilisateur.getMICopierImg1();
+        mICopierImg2 = interfaceUtilisateur.getMICopierImg2();
+        mICollerImg1 = interfaceUtilisateur.getMICollerImg1();
+        mICollerImg2 = interfaceUtilisateur.getMICollerImg2();
 
         imgView1 = interfaceUtilisateur.getImgView1();
         imgView2 = interfaceUtilisateur.getImgView2();
@@ -108,6 +119,12 @@ public class ControleurImg {
 
         undoCommandImg2 = new UndoCommand(modeleImgDroite);
         redoCommandImg2 = new RedoCommand(modeleImgDroite);
+
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem menuItem1 = new MenuItem("Copier");
+        MenuItem menuItem2 = new MenuItem("Coller");
+        contextMenu.getItems().addAll(menuItem1, menuItem2);
+
     }
 
     public static ControleurImg getInstance(InterfaceUtilisateur interfaceUtilisateur) {
@@ -236,6 +253,30 @@ public class ControleurImg {
             choixDialog.setOnCloseRequest(ev -> {
                 elementsACopier = choixDialog.getResult().toString();
             });
+        });
+    }
+
+    public void CopyMilieu() {
+        mICopierImg1.setOnAction(e -> {
+            perspectiveSauvegardé = modeleImgMilieu.créerMemento();
+        });
+    }
+
+    public void CopyDroite() {
+        mICopierImg2.setOnAction(e -> {
+            perspectiveSauvegardé = modeleImgDroite.créerMemento();
+        });
+    }
+
+    public void PasteMilieu() {
+        mICollerImg1.setOnAction(e -> {
+            modeleImgMilieu.chargerPerspective(perspectiveSauvegardé, elementsACopier);
+        });
+    }
+
+    public void PasteDroite() {
+        mICollerImg2.setOnAction(e -> {
+            modeleImgDroite.chargerPerspective(perspectiveSauvegardé, elementsACopier);
         });
     }
 }
