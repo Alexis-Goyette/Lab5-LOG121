@@ -251,7 +251,9 @@ public class ControleurImg {
             choixDialog.setTitle("Élements à copier");
             choixDialog.show();
             choixDialog.setOnCloseRequest(ev -> {
-                elementsACopier = choixDialog.getResult().toString();
+                if (choixDialog.getResult() != null) {
+                    elementsACopier = choixDialog.getResult().toString();
+                }
             });
         });
     }
