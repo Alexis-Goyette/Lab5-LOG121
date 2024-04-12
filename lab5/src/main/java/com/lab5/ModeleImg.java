@@ -87,7 +87,7 @@ public class ModeleImg {
         notifyObservers();
     }
 
-    public void Undo() {
+    public void undo() {
         var image = mementoStack.pop();
         UndoStack.push(créerMemento());
         this.x = (float) image.getX();
@@ -96,7 +96,7 @@ public class ModeleImg {
         notifyObservers();
     }
 
-    public void Redo() {
+    public void redo() {
         var image = UndoStack.pop();
         this.x = (float) image.getX();
         this.y = (float) image.getY();
@@ -136,15 +136,13 @@ public class ModeleImg {
         return y;
     }
 
-    public void setZoomFactor(Float factor) {
-        zoomFactor = factor;
+    public Stack<ImgMemento> getMementoStack() {
+        return mementoStack;
     }
 
-    public void setXTranslationValue(Float x) {
-        this.x = x;
+    public Stack<ImgMemento> getUndoStack() {
+        return UndoStack;
     }
 
-    public void setYTranslationValue(Float y) {
-        this.y = y;
-    }
+
 }

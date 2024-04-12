@@ -21,8 +21,6 @@ public class InterfaceUtilisateur implements IObserver {
     @FXML
     private MenuItem miCI;
     @FXML
-    private MenuItem miSauvegarderImage;
-    @FXML
     private MenuItem miSauvergarderPerspective;
     @FXML
     private MenuItem miCP;
@@ -53,6 +51,7 @@ public class InterfaceUtilisateur implements IObserver {
     @FXML
     private Button btnDroite;
 
+
     private Image image;
 
     private ControleurImg controleur;
@@ -63,27 +62,27 @@ public class InterfaceUtilisateur implements IObserver {
 
     @FXML
     public void initialize() {
+        miSauvergarderPerspective.setDisable(true);
+        miCP.setDisable(true);
+        miChoisirStrat.setDisable(true);
+        miUndo.setDisable(true);
+        miRedo.setDisable(true);
         miCI.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open Resource File");
-
             // Set extension filter
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.png, *.jpeg)",
                     "*.png", "*.jpeg");
             fileChooser.getExtensionFilters().add(extFilter);
-
             File file = fileChooser.showOpenDialog(miCI.getParentPopup().getScene().getWindow());
             if (file != null) {
                 image = new Image(file.toURI().toString());
-                imgViewOriginal.setImage(image);
-                imgViewOriginal.setFitWidth(535); // Set the width
-                imgViewOriginal.setFitHeight(500);
-                imgView1.setImage(image);
-                imgView1.setFitWidth(535); // Set the width
-                imgView1.setFitHeight(500);
-                imgView2.setImage(image);
-                imgView2.setFitWidth(535); // Set the width
-                imgView2.setFitHeight(500);
+                miSauvergarderPerspective.setDisable(false);
+                miCP.setDisable(false);
+                miChoisirStrat.setDisable(false);
+                setImage(imgViewOriginal, image);
+                setImage(imgView1, image);
+                setImage(imgView2, image);
                 controleur = ControleurImg.getInstance(this);
                 // appelle les méthodes du controleur pour instancier les eventHandler
                 controleur.translateDown();
@@ -103,12 +102,22 @@ public class InterfaceUtilisateur implements IObserver {
         });
     }
 
+    public void setImage(ImageView imageView, Image image) {
+        imageView.setImage(image);
+        imageView.setFitWidth(535); // Set the width
+        imageView.setFitHeight(500);
+    }
+
     public void update(ModeleImg modele) {
         modele.getImageView().setTranslateX(modele.getXTranslationValue());
         modele.getImageView().setTranslateY(modele.getYTranslationValue());
         modele.getImageView().setScaleX(modele.getZoomFactor());
         modele.getImageView().setScaleY(modele.getZoomFactor());
+        miRedo.setDisable(modele.getUndoStack().isEmpty());
+        miUndo.setDisable(modele.getMementoStack().isEmpty());
     }
+
+
 
 
     // tout les méthodes get pour que les autres classes aie accèes aux éléments de l'interface
@@ -130,10 +139,6 @@ public class InterfaceUtilisateur implements IObserver {
 
     public MenuItem getMiSauvergarderPerspective() {
         return miSauvergarderPerspective;
-    }
-
-    public MenuItem getMiSauvegarderImage() {
-        return miSauvegarderImage;
     }
 
     public MenuItem getMiCP() {

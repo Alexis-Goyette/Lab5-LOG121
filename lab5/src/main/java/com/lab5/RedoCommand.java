@@ -7,7 +7,7 @@ public class RedoCommand extends AbstractCommand {
     }
 
     public void execute() {
-        modele.Redo();
+        modele.redo();
     }
 
 }

@@ -7,7 +7,7 @@ public class UndoCommand extends AbstractCommand {
     }
 
     public void execute() {
-        modele.Undo();
+        modele.undo();
     }
 
 }
