@@ -1,5 +1,6 @@
 package com.lab5;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Stack;
 import java.awt.image.BufferedImage;
@@ -7,12 +8,15 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
+import javafx.scene.control.ScrollPane;
 
 public class ModeleImg {
 
@@ -80,17 +84,21 @@ public class ModeleImg {
         notifyObservers();
     }
 
-    public void sauvegarderPerspective() {
-        SnapshotParameters parameters = new SnapshotParameters();
-        WritableImage wi = new WritableImage((int) imgView.getFitWidth(), (int) imgView.getFitHeight());
-        WritableImage snapshot = imgView.snapshot(parameters, wi);
-
+    public void sauvegarderPerspective(ScrollPane scrollPane) {
+        // Prepare the snapshot parameters
+        SnapshotParameters params = new SnapshotParameters();
+        params.setViewport(new Rectangle2D(
+                scrollPane.getViewportBounds().getMinX(),
+                scrollPane.getViewportBounds().getMinY(),
+                scrollPane.getViewportBounds().getWidth(),
+                scrollPane.getViewportBounds().getHeight()
+        ));
+        WritableImage snapshot = scrollPane.getContent().snapshot(params, null);
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Image");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("PNG Files", "*.png")
-        );
-        File file = fileChooser.showSaveDialog(null); // You should pass the primary stage here instead of null.
+        fileChooser.setTitle("Save Image as Perspective File");
+        fileChooser.setInitialFileName("savedImage.perspective");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Perspective Files", "*.perspective"));
+        File file = fileChooser.showSaveDialog(null);
         if (file != null) {
             try {
                 BufferedImage bImage = SwingFXUtils.fromFXImage(snapshot, null);
@@ -166,6 +174,18 @@ public class ModeleImg {
     public float getYTranslationValue() {
         return y;
     }
+
+    public void resetValues() {
+        this.x = 0;
+        this.y = 0;
+        this.zoomFactor = 1;
+        notifyObservers();
+    }
+
+    public ImageView getImgView() {
+        return imgView;
+    }
+
 
     public Stack<ImgMemento> getMementoStack() {
         return mementoStack;

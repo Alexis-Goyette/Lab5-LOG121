@@ -1,11 +1,17 @@
 package com.lab5;
 
+import java.awt.*;
+import javafx.scene.control.ScrollPane;
+
 public class SaveAsCommand extends AbstractCommand{
-    public SaveAsCommand(ModeleImg modele) {
+
+    private ScrollPane scrollPane;
+    public SaveAsCommand(ModeleImg modele, ScrollPane scrollPane) {
         super(modele);
+        this.scrollPane = scrollPane;
     }
 
     public void execute() {
-        modele.sauvegarderPerspective();
+        modele.sauvegarderPerspective(this.scrollPane);
     }
 }

@@ -1,5 +1,7 @@
 package com.lab5;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -8,9 +10,12 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
 public class ControleurImg {
     public ControleurImg() {
@@ -42,6 +47,12 @@ public class ControleurImg {
     private static ImageView imgView1;
 
     private static ImageView imgView2;
+
+    private ScrollPane scrollPane1;
+
+    private ScrollPane scrollPane2;
+
+    InterfaceUtilisateur interfaceUtilisateur;
 
     private ModeleImg modeleImgSelectionne;
 
@@ -76,6 +87,7 @@ public class ControleurImg {
 
     private ControleurImg(InterfaceUtilisateur interfaceUtilisateur) {
         // Aller chercher les rfrances aux diffrents boutons et modèles des images
+        this.interfaceUtilisateur = interfaceUtilisateur;
         btnGauche = interfaceUtilisateur.getBtnGauche();
         btnDroite = interfaceUtilisateur.getBtnDroite();
         btnHaut = interfaceUtilisateur.getBtnHaut();
@@ -95,6 +107,9 @@ public class ControleurImg {
 
         imgView1 = interfaceUtilisateur.getImgView1();
         imgView2 = interfaceUtilisateur.getImgView2();
+
+        scrollPane1 = interfaceUtilisateur.getScrollPane1();
+        scrollPane2 = interfaceUtilisateur.getScrollPane2();
 
         this.modeleImgMilieu = new ModeleImg(imgView1, interfaceUtilisateur);
         this.modeleImgDroite = new ModeleImg(imgView2, interfaceUtilisateur);
@@ -121,8 +136,8 @@ public class ControleurImg {
 
         undoCommandImg2 = new UndoCommand(modeleImgDroite);
         redoCommandImg2 = new RedoCommand(modeleImgDroite);
-        saveAsCommandImg1 = new SaveAsCommand(modeleImgMilieu);
-        saveAsCommandImg2 = new SaveAsCommand(modeleImgDroite);
+        saveAsCommandImg1 = new SaveAsCommand(modeleImgMilieu, scrollPane1);
+        saveAsCommandImg2 = new SaveAsCommand(modeleImgDroite, scrollPane2);
 
         ContextMenu contextMenu = new ContextMenu();
         MenuItem menuItem1 = new MenuItem("Copier");
@@ -233,12 +248,18 @@ public class ControleurImg {
         });
     }
 
-    public void Chargerperspective() {
-        miCP.setOnAction(e -> {
-            modeleImgMilieu.chargerPerspective(perspectiveSauvegardé, elementsACopier);
-
-            modeleImgDroite.chargerPerspective(perspectiveSauvegardé, elementsACopier);
-        });
+    public void chargerPerspective() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Perspective File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Perspective Files", "*.perspective"));
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            Image image = new Image(file.toURI().toString());
+            modeleImgMilieu.getImgView().setImage(image);
+            modeleImgDroite.getImgView().setImage(image);
+            modeleImgMilieu.resetValues();
+            modeleImgDroite.resetValues();
+        }
     }
 
     public void Undo() {

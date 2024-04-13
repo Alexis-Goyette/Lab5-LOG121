@@ -1,10 +1,7 @@
 package com.lab5;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -61,6 +58,11 @@ public class InterfaceUtilisateur implements IObserver {
     @FXML
     private MenuItem mICollerImg2;
 
+    @FXML
+    private ScrollPane scrollPane1;
+    @FXML
+    private ScrollPane scrollPane2;
+
     private Image image;
 
     private ControleurImg controleur;
@@ -103,7 +105,6 @@ public class InterfaceUtilisateur implements IObserver {
                 controleur.selectionementImgV1();
                 controleur.selectionementImgV2();
                 controleur.Save();
-                controleur.Chargerperspective();
                 controleur.Undo();
                 controleur.Redo();
                 controleur.ChoixStrat();
@@ -114,6 +115,7 @@ public class InterfaceUtilisateur implements IObserver {
                 controleur.PasteDroite();
             }
         });
+        miCP.setOnAction(e -> controleur.chargerPerspective());
     }
 
     public void setImage(ImageView imageView, Image image) {
@@ -174,6 +176,14 @@ public class InterfaceUtilisateur implements IObserver {
 
     public ImageView getImgView2() {
         return imgView2;
+    }
+
+    public ScrollPane getScrollPane1() {
+        return scrollPane1;
+    }
+
+    public ScrollPane getScrollPane2() {
+        return scrollPane2;
     }
 
     public Button getBtnZoomIn() {
