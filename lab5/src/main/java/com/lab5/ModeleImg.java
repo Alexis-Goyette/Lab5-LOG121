@@ -113,10 +113,6 @@ public class ModeleImg {
         notifyObservers();
     }
 
-    public void save() {
-        notifyObservers();
-    }
-
     public void undo() {
         var image = mementoStack.pop();
         undoStack.push(créerMemento());
