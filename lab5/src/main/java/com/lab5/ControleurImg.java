@@ -222,6 +222,17 @@ public class ControleurImg {
         });
     }
 
+    public void Save() {
+        miSauvergarderPerspective.setOnAction(e -> {
+            if (modeleImgSelectionne == modeleImgMilieu)
+                perspectiveSauvegardé = modeleImgMilieu.créerMemento();
+
+            else
+                perspectiveSauvegardé = modeleImgDroite.créerMemento();
+
+        });
+    }
+
     public void Chargerperspective() {
         miCP.setOnAction(e -> {
             modeleImgMilieu.chargerPerspective(perspectiveSauvegardé, elementsACopier);

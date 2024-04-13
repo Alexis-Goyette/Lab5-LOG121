@@ -102,6 +102,7 @@ public class InterfaceUtilisateur implements IObserver {
                 controleur.zoomOut();
                 controleur.selectionementImgV1();
                 controleur.selectionementImgV2();
+                controleur.Save();
                 controleur.Chargerperspective();
                 controleur.Undo();
                 controleur.Redo();
