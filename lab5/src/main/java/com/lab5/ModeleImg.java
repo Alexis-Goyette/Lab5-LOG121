@@ -18,10 +18,10 @@ import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 import javafx.scene.control.ScrollPane;
 
-public class ModeleImg {
+public class ModeleImg implements ISubject{
 
     private ImageView imgView;
-    private ArrayList<InterfaceUtilisateur> observateurs;
+    private ArrayList<IObserver> observateurs;
     private final int translationValue = 10;
     private final float zoomTranlationValue = 0.1f;
 
@@ -32,7 +32,7 @@ public class ModeleImg {
 
     public ModeleImg(ImageView imageView, InterfaceUtilisateur interfaceUtilisateur) {
         imgView = imageView;
-        observateurs = new ArrayList<InterfaceUtilisateur>();
+        observateurs = new ArrayList<IObserver>();
         zoomFactor = 1;
         mementoStack = new Stack<ImgMemento>();
         undoStack = new Stack<ImgMemento>();
@@ -43,11 +43,11 @@ public class ModeleImg {
         return imgView;
     }
 
-    public void addObserver(InterfaceUtilisateur observer) {
+    public void addObserver(IObserver observer) {
         observateurs.add(observer);
     }
 
-    public void removeObserver(ImageView observer) {
+    public void removeObserver(IObserver observer) {
         int index = observateurs.indexOf(observer);
         if (index > 0) {
             observateurs.remove(index);

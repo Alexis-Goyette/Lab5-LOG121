@@ -237,17 +237,6 @@ public class ControleurImg {
         });
     }
 
-    public void Save() {
-        miSauvergarderPerspective.setOnAction(e -> {
-            if (modeleImgSelectionne == modeleImgMilieu)
-                perspectiveSauvegardé = modeleImgMilieu.créerMemento();
-
-            else
-                perspectiveSauvegardé = modeleImgDroite.créerMemento();
-
-        });
-    }
-
     public void chargerPerspective() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Perspective File");
