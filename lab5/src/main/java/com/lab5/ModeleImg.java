@@ -91,8 +91,7 @@ public class ModeleImg implements ISubject{
                 scrollPane.getViewportBounds().getMinX(),
                 scrollPane.getViewportBounds().getMinY(),
                 scrollPane.getViewportBounds().getWidth(),
-                scrollPane.getViewportBounds().getHeight()
-        ));
+                scrollPane.getViewportBounds().getHeight()));
         WritableImage snapshot = scrollPane.getContent().snapshot(params, null);
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Image as Perspective File");
@@ -118,10 +117,6 @@ public class ModeleImg implements ISubject{
     public void zoomOut() {
         mementoStack.push(créerMemento());
         this.zoomFactor -= zoomTranlationValue;
-        notifyObservers();
-    }
-
-    public void save() {
         notifyObservers();
     }
 
@@ -186,7 +181,6 @@ public class ModeleImg implements ISubject{
         return imgView;
     }
 
-
     public Stack<ImgMemento> getMementoStack() {
         return mementoStack;
     }
@@ -194,6 +188,5 @@ public class ModeleImg implements ISubject{
     public Stack<ImgMemento> getUndoStack() {
         return undoStack;
     }
-
 
 }

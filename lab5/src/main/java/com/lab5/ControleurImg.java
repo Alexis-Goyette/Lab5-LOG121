@@ -83,7 +83,7 @@ public class ControleurImg {
 
     private String[] elementACopierChoix = { "Translation seulement", "Grandissement seulement",
             "Translation et Grandissement" };
-    private String elementsACopier = "Translation et Grandissement";
+    private String elementsACopier = "Translation seulement";
 
     private ControleurImg(InterfaceUtilisateur interfaceUtilisateur) {
         // Aller chercher les rfrances aux diffrents boutons et modèles des images

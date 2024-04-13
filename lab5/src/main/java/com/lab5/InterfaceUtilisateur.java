@@ -131,6 +131,7 @@ public class InterfaceUtilisateur implements IObserver {
         miRedo.setDisable(modele.getUndoStack().isEmpty());
         miUndo.setDisable(modele.getMementoStack().isEmpty());
     }
+
     // tout les méthodes get pour que les autres classes aie accèes aux éléments de
     // l'interface
     public MenuButton getMbFichier() {
