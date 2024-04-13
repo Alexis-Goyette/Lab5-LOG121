@@ -83,7 +83,7 @@ public class ControleurImg {
 
     private String[] elementACopierChoix = { "Translation seulement", "Grandissement seulement",
             "Translation et Grandissement" };
-    private String elementsACopier = "Translation et Grandissement";
+    private String elementsACopier = "Translation seulement";
 
     private ControleurImg(InterfaceUtilisateur interfaceUtilisateur) {
         // Aller chercher les rfrances aux diffrents boutons et modèles des images
@@ -234,17 +234,6 @@ public class ControleurImg {
                 saveAsCommandImg1.execute();
             else
                 saveAsCommandImg2.execute();
-        });
-    }
-
-    public void Save() {
-        miSauvergarderPerspective.setOnAction(e -> {
-            if (modeleImgSelectionne == modeleImgMilieu)
-                perspectiveSauvegardé = modeleImgMilieu.créerMemento();
-
-            else
-                perspectiveSauvegardé = modeleImgDroite.créerMemento();
-
         });
     }
 

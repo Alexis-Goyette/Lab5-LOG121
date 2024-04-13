@@ -104,7 +104,6 @@ public class InterfaceUtilisateur implements IObserver {
                 controleur.zoomOut();
                 controleur.selectionementImgV1();
                 controleur.selectionementImgV2();
-                controleur.Save();
                 controleur.Undo();
                 controleur.Redo();
                 controleur.ChoixStrat();
@@ -132,7 +131,8 @@ public class InterfaceUtilisateur implements IObserver {
         miRedo.setDisable(modele.getUndoStack().isEmpty());
         miUndo.setDisable(modele.getMementoStack().isEmpty());
     }
-    // tout les méthodes get pour que les autres classes aie accèes aux éléments de
+    /
+
     // l'interface
     public MenuButton getMbFichier() {
         return mbFichier;
